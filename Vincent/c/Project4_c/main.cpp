@@ -1,0 +1,191 @@
+#include <iostream>
+#include <math.h>
+#include <random>
+#include <time.h>
+#include <fstream>
+
+#define k_b 1.38064852e-23
+#define eV 1.602e-19
+
+using namespace std;
+
+//Performs the Metropolis algorithm
+void metropolis_energy(int n, double J, int T, int** s,double* meanM, double* susceptibility, double* meanE);
+
+//Calculates the energy for one specific state
+double E(double J, int** s)
+{
+    double sum[3] = {0,0,0};
+    for(int i = 0; i < 20; i++)
+    {
+        for(int j = 0; j < 20; j++)
+        {
+            sum[0] += s[i][j]*(s[i][(j+1)%20]+s[(i+1)%20][j]);
+        }
+        sum[1] += s[i][19]*s[i][0];
+        sum[2] += s[0][i]*s[19][i];
+    }
+    return -J*(sum[0]+sum[1]+sum[2]);
+}
+
+//Gives back a random spin value
+int spin_generator(int random)
+{
+    return random%2 == 1 ? 1 : -1;
+}
+
+//Generates a random state of the system
+void spin_assigner(int** s)
+{
+    for(int i = 0; i < 20; i++)
+    {
+        for(int j = 0; j < 20; j++)
+        {
+            s[i][j] = spin_generator(rand());
+        }
+    }
+    return;
+}
+
+int main()
+{
+    int n;
+    double J;
+    int Tmin, Tstep, Tmax;
+    double meanM = 0;
+    double susceptibility = 0;
+    double meanE = 0;
+    int** s = new int* [20];
+    for(int i = 0; i < 20; i++)
+    {
+        s[i] = new int[20];
+    }
+
+    Tmin = 10000;
+    Tstep = 1000;
+    Tmax = 100000;
+    n = 5000000;
+    J = 1;
+
+    ofstream data("messdaten_c.txt");
+
+/*
+    cout << "The mean energy is: " << meanE << endl
+         << "The mean magnetization is: " << meanM << endl
+         << "The susceptibility is: " << susceptibility << endl;
+*/
+    data << "# Temperature, Energy expectationvalue, M expectationvalue, Susceptibility expectationvalue\n";
+
+    for(int T = Tmin; T <= Tmax; T += Tstep)
+    {
+        metropolis_energy(n, J, T, s, &meanM, &susceptibility, &meanE);
+
+        data << T << "  " << meanE << "    " << meanM << "   " << susceptibility << endl;
+    }
+
+    data.close();
+
+
+    for (int i = 0; i < 2; i++)
+    {
+        delete[] s[i];
+    }
+    delete[] s;
+    return 0;
+}
+
+//This function gives the mean energy value in eV, using the metropolis algorithm
+void metropolis_energy(int n, double J, int T, int** s, double* meanM, double* susceptibility, double* meanE)
+{
+    double Energy, dEnergy, sumEnergies = 0, p, prob[5];
+    double M = 0, absM, sumabsM = 0, sumM = 0, sumMsquared = 0;
+    int x, y, x2, y2, alpha, oldspin;
+
+    //initializing the random number generator
+    srand(time(NULL));
+    default_random_engine generator(rand());
+    uniform_real_distribution<double> distribution(0,1);
+
+    //generates the spins
+    //spin_assigner(s);
+    for(int i = 0; i < 20; i++)
+    {
+        for(int j = 0; j < 20; j++)
+        {
+            s[i][j] = 1;
+        }
+    }
+
+    //calculates magnetization
+    for(int i = 0; i < 20 ; i++)
+    {
+        for(int j = 0; j < 20; j++)
+        {
+            M += s[i][j];
+        }
+    }
+
+    //computes energy to our generated spins
+    Energy = E(J, s);
+
+    prob[2] = exp(-4*J*eV/(k_b*double(T)));
+    prob[4] = exp(-8*J*eV/(k_b*double(T)));
+    cout << "Probabilities: " << prob[4] << "     " << prob[2] << endl << endl;
+
+    //Here the metropolis algorithm starts
+    for(int i = 0; i < n ; i++)
+    {
+        //change to a new state
+        x = rand()%20;
+        y = rand()%20;
+        oldspin = s[x][y];
+        s[x][y] *= -1;
+
+        if(x == 0) {x2 = 19;}
+        else       {x2 = x-1;}
+        if(y == 0) {y2 = 19;}
+        else       {y2 = y-1;}
+
+        alpha = s[(x+1)%20][y]+s[x2][y]+s[x][(y+1)%20]+s[x][y2];
+
+        //saves probability that a step gets accepted
+        if(alpha > 0)
+        {
+            p = prob[alpha];
+
+            //calculating the difference between the old and new energy
+            dEnergy = -2*J*alpha*oldspin;
+        }
+        else
+        {
+            p = 1;
+        }
+
+        //decides now, if the step gets accepted
+        if(distribution(generator) <= p)
+        {
+            Energy -= dEnergy;
+        }
+        else
+        {
+            s[x][y] = oldspin;
+        }
+
+        sumEnergies += Energy;
+
+        M += s[x][y] - oldspin;
+        absM = abs(M);
+        sumabsM += absM;
+        sumM += M;
+        sumMsquared += absM*absM;
+
+    }
+
+    *meanM = sumabsM/n;
+    *susceptibility = (sumMsquared/n-(sumM/n)*(sumM/n))/(k_b*double(T));
+    *meanE = sumEnergies/n;
+
+    return;
+}
+
+
