@@ -106,28 +106,42 @@ Number of spins up (+1) & Degeneracy &  Energy & Magnetization\\
 0 & 1 & $-8J$ & -4 
 \end{tabular}
 \end{figure}
-We can now write the expression of the partition function:
+We can now write the expression of the partition function as in equation \ref{Partition 2x2}. We used the Table \ref{table of microstates} to calculate the sum over the micro states. 
 \begin{align}
-Z&= \sum_{i=1}^{M} e^{- \beta E_i}= 12 \cdot e^{-\beta \cdot 0 } + 2 \cdot e^{-8J \beta } + 1 \cdot e^{9J \beta } + 1 \cdot e^{9J \beta } \\
-&= 12+ 2 \cdot e^{-8J \beta } + 2 \cdot e^{9J \beta } \\
-&= 12+ 4 \cdot cosh \left( 8J \beta \right)
+Z&= \sum_{i=1}^{M} e^{- \beta E_i}= 12 \cdot e^{-\beta \cdot 0 } + 2 \cdot e^{-8J \beta } + 1 \cdot e^{8J \beta } + 1 \cdot e^{8J \beta } \\
+&= 12+ 2 \cdot e^{-8J \beta } + 2 \cdot e^{8J \beta } \\
+&= 12+ 4 \cdot cosh \left( 8J \beta \right) \label{Partition 2x2}
 \end{align} 
-
+We can now calculate the expectation value of the energy. There are two possible ways of calculating it. the first way of calculating the expectation value of the energy can be seen in equation \ref{Energyexpectation way1}. 
 \begin{align}
-<E>&= - \frac{\partial ln(Z)}{\partial \beta} =\frac{1}{Z} \cdot 32J \beta \cdot sinh(8J \beta ) \\
-&= \frac{32 J \beta \cdot sinh((J \beta )}{Z}
+<E>&= - \frac{\partial ln(Z)}{\partial \beta} =\frac{1}{Z} \cdot 32J  \cdot sinh(8J \beta ) \\ \label{Energyexpectation way1}
+&= \frac{32 J \cdot sinh((8J \beta )}{Z}\\
+&=\frac{8 \cdot J \cdot  sinh(8J \beta ) }{3+cosh(8J\beta)}
 \end{align}
-
+Alternatively, we can calculate the expectation value of the Energy by looking at the micro states:
 \begin{align}
-<M> &= \frac{1}{Z} \sum_{i}^M M_i \cdot e^{- \beta E_i }
+<E> = \frac{1}{Z} \sum_{i=1}^{M} E_i e^{- \beta E_i}=\frac{8 \cdot J \cdot  sinh(8J \beta ) }{3+cosh(8J\beta)}
 \end{align}
-
+Both expressions are equal. Next, we want to determine the expectation value of the magnetisation. We use the formula \ref{expectation magnetisation 2x2}. We can see that we get 0 for the expectation value of the magnetisation. 
 \begin{align}
-C_v &= \frac{1}{k_b T^2} \left( \frac{1}{Z} \sum_{i=1}^{M} E_i^2 e^{- \beta E_i } - \left( \frac{1}{Z} \sum_{i=1}^{M} E_i e^{- \beta E_i }  \right)^2 \right)
+<M> &= \frac{1}{Z} \sum_{i}^M M_i \cdot e^{- \beta E_i }\\\label{expectation magnetisation 2x2}
+&= \frac{1}{Z} \cdot \left( 4 \cdot 1 \cdot e^{-8J\beta}+ 2 \cdot 4+(-2) \cdot 4 + (-4) \cdot 1 \cdot e^{-8J \beta } \right)\\
+&=0
 \end{align}
-
+In order to describe how the temperature will change when thermal energy is added to the system, we want to look at a quantity called heap capacity. ($C_v$) The bigger this quantity is the less heats the system up by a given amount of thermal energy, which is added to the system.  
 \begin{align}
-\chi = \frac{1}{k_b T} \cdot \left( \frac{1}{Z} \sum_{i=1}^{M} M_i^2 e^{- \beta E_i } - \left( \frac{1}{Z} \sum_{i=1}^{M} M_i e^{- \beta E_i }  \right)^2 \right)
+C_v &= \frac{1}{k_b T^2} \left( \frac{1}{Z} \sum_{i=1}^{M} E_i^2 e^{- \beta E_i } - \left( \frac{1}{Z} \sum_{i=1}^{M} E_i e^{- \beta E_i }  \right)^2 \right)\\
+&=\frac{1}{k_b T^2} \left( \frac{1}{Z} \left( 2 \cdot (8J)^2 \cdot e^{8J \beta}+2 \cdot (-8J)^2 \cdot e^{-8J \beta} \right) - \left( \frac{8 \cdot J \cdot  sinh(8J \beta ) }{3+cosh(8J\beta)} \right)^2 \right)\\
+&=\frac{1}{k_b T^2} \left( \frac{64\cdot J\cdot cosh(8 J \beta )}{3+cosh(8J\beta)}  - \left( \frac{8 \cdot J \cdot sinh(8J \beta ) }{3+cosh(8J\beta)} \right)^2 \right)\\
+&= \frac{1}{k_b T^2} \left( \frac{64 \cdot J +3\cdot J \cdot 64 cosh(8J \beta)}{\left(3+cosh(8J\beta)\right)^2} \right)\\
+&= \frac{64}{k_b T^2} \left( \frac{ J +3 J \cdot cosh(8J \beta)}{\left(3+cosh(8J\beta)\right)^2} \right)\\
+\end{align}
+At last, we wan to have a look at the magnetic susceptibility. This quantity is a magnetic property of the material. The magnetic susceptibility describes the response of the material to an applied magnetic field. 
+\begin{align}
+\chi &= \frac{1}{k_b T} \cdot \left( \frac{1}{Z} \sum_{i=1}^{M} M_i^2 e^{- \beta E_i } - \left( \frac{1}{Z} \sum_{i=1}^{M} M_i e^{- \beta E_i }  \right)^2 \right)\\
+&= \frac{1}{k_b T} \cdot \left( \frac{1}{Z} \cdot \left( 4^2 \cdot 1 \cdot e^{-8J\beta}+ 2^2 \cdot 4+(-2)^2 \cdot 4 + (-4)^2 \cdot 1 \cdot e^{-8J \beta } \right) - \left( 0  \right)^2 \right)\\
+&= \frac{1}{k_b T} \cdot \frac{32 e^{-8J\beta}+32}{ 12+ 4 \cdot cosh \left( 8J \beta \right)}\\
+&= \frac{1}{k_b T} \cdot \frac{8 e^{-8J\beta}+8}{ 3+ \cdot cosh \left( 8J \beta \right)}\\
 \end{align}
 
 \section{Execution}
