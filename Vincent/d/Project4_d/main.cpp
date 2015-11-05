@@ -61,19 +61,20 @@ int main()
         s[i] = new int[20];
     }
 
-    T = 50000;
-    /*
+    T = 30000;
     Tmin = 10000;
-    Tstep = 1000;
+    Tstep = 100;
     Tmax = 100000;
-    */
-    n = 30000;
+
+    n = 100000000;
     J = 1;
-    ofstream data("messdaten_c.txt");
+    ofstream data("messdaten_d.txt");
 
-    /*
-    data << "# Temperature, Energy expectationvalue, M expectationvalue, Susceptibility expectationvalue\n";
+    data << "# State; Frequency of a state\n";
 
+    metropolis_energy(n, J, T, s, &meanM, &susceptibility, &meanE, data);
+
+/*
     for(int T = Tmin; T <= Tmax; T += Tstep)
     {
         data << T << "  ";
@@ -83,8 +84,6 @@ int main()
         data << meanE << "    " << meanM << "   " << susceptibility << endl;
     }
 */
-
-    metropolis_energy(n, J, T, s, &meanM, &susceptibility, &meanE, data);
     data.close();
 
 
@@ -101,14 +100,18 @@ void metropolis_energy(int n, double J, int T, int** s, double* meanM, double* s
 {
     double Energy, dEnergy, sumEnergies = 0, p, prob[5];
     double M = 0, absM, sumabsM = 0, sumM = 0, sumMsquared = 0;
-    int x, y, alpha, oldspin, acceptedconfig = 0;
+    int x, y, alpha, oldspin;
+    int Energy_state_amount[200], state;
+
+    for(int i = 0;i < 200; i++)
+    {
+        Energy_state_amount[i] = 0;
+    }
 
     //initializing the random number generator
     srand(time(NULL));
     default_random_engine generator(rand());
     uniform_real_distribution<double> distribution(0,1);
-
-    data << "#MCcycles; Energy expectation value; Magnetization expectation value; Susceptibility expectation value; Accepted configurations" << endl;
 
     //generates the spins
     //spin_assigner(s);
@@ -119,6 +122,8 @@ void metropolis_energy(int n, double J, int T, int** s, double* meanM, double* s
             s[i][j] = 1;
         }
     }
+    //Every spin up gives the lowest energy. Hence we are in state number 0
+    state = 0;
 
     //calculates magnetization
     for(int i = 0; i < 20 ; i++)
@@ -164,7 +169,7 @@ void metropolis_energy(int n, double J, int T, int** s, double* meanM, double* s
         if(distribution(generator) <= p)
         {
             Energy -= dEnergy;
-            acceptedconfig++;
+            state += (alpha*oldspin)/2;
         }
         else
         {
@@ -172,22 +177,23 @@ void metropolis_energy(int n, double J, int T, int** s, double* meanM, double* s
         }
 
         sumEnergies += Energy;
-
         M += s[x][y] - oldspin;
         absM = abs(M);
         sumabsM += absM;
         sumM += M;
         sumMsquared += absM*absM;
 
-        *meanM = sumabsM/(i+1);
-        *susceptibility = (sumMsquared/(i+1)-(sumM/(i+1))*(sumM/(i+1)))/(k_b*double(T));
-        *meanE = sumEnergies/(i+1);
-
-        data << i+1 << "    " << *meanE << "    " << *meanM << "    " << *susceptibility << "   " << acceptedconfig << endl;
+        Energy_state_amount[state]++;
     }
 
+    *meanM = sumabsM/n;
+    *susceptibility = (sumMsquared/n-(sumM/n)*(sumM/n))/(k_b*double(T));
+    *meanE = sumEnergies/n;
+
+    for(int i = 0; i < 200; i++)
+    {
+        data << i << "  " << Energy_state_amount[i] << endl;
+    }
 
     return;
 }
-
-
