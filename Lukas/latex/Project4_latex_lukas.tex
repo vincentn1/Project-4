@@ -108,11 +108,27 @@ Number of spins up (+1) & Degeneracy &  Energy & Magnetization\\
 \end{figure}
 We can now write the expression of the partition function:
 \begin{align}
-Z&= \sum_{i=1}^{M} e^{- \beta E_i}= 12 * e^{-\beta \cdot 0 } + 2 \cdot e^{-8J \beta } + 1 \cdot e^{9J \beta } + 1 \cdot e^{9J \beta } \\
+Z&= \sum_{i=1}^{M} e^{- \beta E_i}= 12 \cdot e^{-\beta \cdot 0 } + 2 \cdot e^{-8J \beta } + 1 \cdot e^{9J \beta } + 1 \cdot e^{9J \beta } \\
 &= 12+ 2 \cdot e^{-8J \beta } + 2 \cdot e^{9J \beta } \\
 &= 12+ 4 \cdot cosh \left( 8J \beta \right)
 \end{align} 
 
+\begin{align}
+<E>&= - \frac{\partial ln(Z)}{\partial \beta} =\frac{1}{Z} \cdot 32J \beta \cdot sinh(8J \beta ) \\
+&= \frac{32 J \beta \cdot sinh((J \beta )}{Z}
+\end{align}
+
+\begin{align}
+<M> &= \frac{1}{Z} \sum_{i}^M M_i \cdot e^{- \beta E_i }
+\end{align}
+
+\begin{align}
+C_v &= \frac{1}{k_b T^2} \left( \frac{1}{Z} \sum_{i=1}^{M} E_i^2 e^{- \beta E_i } - \left( \frac{1}{Z} \sum_{i=1}^{M} E_i e^{- \beta E_i }  \right)^2 \right)
+\end{align}
+
+\begin{align}
+\chi = \frac{1}{k_b T} \cdot \left( \frac{1}{Z} \sum_{i=1}^{M} M_i^2 e^{- \beta E_i } - \left( \frac{1}{Z} \sum_{i=1}^{M} M_i e^{- \beta E_i }  \right)^2 \right)
+\end{align}
 
 \section{Execution}
 
