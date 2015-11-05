@@ -10,7 +10,7 @@
 using namespace std;
 
 //Performs the Metropolis algorithm
-double metropolis_energy(int n, double J, int T, int** s,double* meanM, double* susceptibility);
+void metropolis_energy(int n, double J, int T, int** s,double* meanM, double* susceptibility, double* meanE);
 
 //Calculates the energy for one specific state
 double E(double J, int s12,int s21, int s11, int s22)
@@ -47,33 +47,39 @@ int main()
 {
     int n;
     double J;
-    int Tmin, Tstep, Tmax, T;
+    int Tmin, Tstep, Tmax;
     double meanM = 0;
-    double susceptibility;
+    double susceptibility = 0;
+    double meanE = 0;
     int** s = new int* [2];
     for(int i = 0; i < 2; i++)
     {
         s[i] = new int[2];
     }
 
-    T = 100000;
-    n = 50000000;
+    Tmin = 10000;
+    Tstep = 100;
+    Tmax = 100000;
+    n = 5000000;
     J = 1;
 
-    ofstream text("messdaten.txt");
+    ofstream data("messdaten.txt");
 
-    /*
-    cout << "The mean energy is: " << metropolis_energy(n, J, T, s, &meanM, &susceptibility) << endl
+/*
+    cout << "The mean energy is: " << meanE << endl
          << "The mean magnetization is: " << meanM << endl
          << "The susceptibility is: " << susceptibility << endl;
-    */
+*/
+    data << "# Temperature, Energy expectationvalue, M expectationvalue, Susceptibility expectationvalue\n";
 
-    //for(int T = Tmin; i <= Tmax; i += Tstep)
-    //{
-        text << T << "  " << metropolis_energy(n, J, T, s, &meanM, &susceptibility) << "    " << meanM << "   " << susceptibility << endl;
-    //}
+    for(int T = Tmin; T <= Tmax; T += Tstep)
+    {
+        metropolis_energy(n, J, T, s, &meanM, &susceptibility, &meanE);
 
-    text.close();
+        data << T << "  " << meanE << "    " << meanM << "   " << susceptibility << endl;
+    }
+
+    data.close();
 
 
     for (int i = 0; i < 2; i++)
@@ -85,7 +91,7 @@ int main()
 }
 
 //This function gives the mean energy value in eV, using the metropolis algorithm
-double metropolis_energy(int n, double J, int T, int** s, double* meanM, double* susceptibility)
+void metropolis_energy(int n, double J, int T, int** s, double* meanM, double* susceptibility, double* meanE)
 {
     double Energy, dEnergy, sumEnergies = 0, p, prob;
     double absM, sumabsM = 0, sumM = 0, sumMsquared = 0;
@@ -108,6 +114,8 @@ double metropolis_energy(int n, double J, int T, int** s, double* meanM, double*
     //computes energy to our generated spins
     Energy = E(J, s[0][1],s[1][0],s[0][0],s[1][1]);
     prob = exp(-8*J*eV/(k_b*double(T)));
+
+    cout << "Probability: " << prob << endl << endl;
 
     //Here the metropolis algorithm starts
     for(int i = 0; i < n ; i++)
@@ -143,7 +151,7 @@ double metropolis_energy(int n, double J, int T, int** s, double* meanM, double*
 
         sumEnergies += Energy;
 
-        absM = abs(s[0][0])+abs(s[0][1])+abs(s[1][0])+abs(s[1][1]);
+        absM = abs(s[0][0] + s[0][1] + s[1][0] + s[1][1]);
         sumabsM += absM;
         sumM += s[0][0]+s[0][1]+s[1][0]+s[1][1];
         sumMsquared += absM*absM;
@@ -152,6 +160,8 @@ double metropolis_energy(int n, double J, int T, int** s, double* meanM, double*
 
     *meanM = sumabsM/n;
     *susceptibility = (sumMsquared/n-(sumM/n)*(sumM/n))/(k_b*double(T));
-    return sumEnergies/n;
+    *meanE = sumEnergies/n;
+
+    return;
 }
 
