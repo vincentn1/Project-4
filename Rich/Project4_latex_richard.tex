@@ -36,7 +36,7 @@ This project may also show the link from statistical physics to macroscopic prop
 \subsection{General properties of physical systems and their link to statistical physics}
 
 \subsubsection{physical ensembles}
-
+%Lukas particl exchange not fix temp %chanonical 
 Canonical ensemble is a statistical way to represents the possible states in a system with fixed temperature, whereas the system exchange energy, the energy follows as an expectation value. The probability distribution is given by the Boltzmann distribution.
 
 \begin{align}
@@ -53,11 +53,11 @@ $\beta = 1/k_B T$ where T is the temperature, $k_B$ is the Bolztmann constant,$E
 the canonical ensemble pursuit towards an energy minimum and higher entropy expressed by Helmholtz' free energy.
 
 \begin{equation}
-F=-k_bTlnZ = <E>-TS \label{F}
+F=-k_BTlnZ = <E>-TS \label{F}
 \end{equation}
 where the entropy S is given by
 \begin{equation}
-S=-k_blnZ + k_b T \frac{\partial lnZ}{\partial T}\label{S}
+S=-k_BlnZ + k_B T \frac{\partial lnZ}{\partial T}\label{S}
 \end{equation}
 after running the system for long time the canonical ensemble is uniquely determined and does not depend on the arbitrary choices for a given temperature, having a steady state without being affected by the equilibrium continuous motion.
 the system uncertainty  due the Energy fluctuations in the canonical ensemble give the variance of the energy.\\
@@ -73,16 +73,17 @@ C_V =\frac{\partial E}{\partial T}
 \end{equation}
 
 \begin{equation}
-\frac{\partial}{\partial T}\frac{1}{Z} = \frac{\partial}{\partial T}\frac{1}{\sum_{i=1}^{M}e^{- \beta E_i}} = \frac {E_i}{K_B T^2  \sum_{i=1}^{M}e^{- \beta E_i}} = \frac{E_i}{K_BT^2} \frac{1}{Z}
+\frac{\partial}{\partial T}\frac{1}{Z} = \frac{\partial}{\partial T}\frac{1}{\sum_{i=1}^{M}e^{- \frac{1}{k_BT} E_i}} = -\frac{1}{k_B T^2 } \frac{\sum_{i=1}^{M} E_i e^{-E_i \frac{1}{k_BT}}}{\left(\sum_{i=1}^{M} e^{-E_i \frac{1}{k_BT}} \right)^2}=-\frac{1}{k_B T^2 } \frac{\sum_{i=1}^{M} E_i e^{-E_i \frac{1}{k_BT}}}{\left( Z\right)^2}
 \end{equation}
 
 \begin{equation}
-\frac{\partial}{\partial T}\sum_{i=1}^{M}E_i e ^{ - \beta E_i} = -\frac{1}{k_BT^2}\sum_{i=1}^{M}E_i^2 e ^{ - \beta E_i}
+\frac{\partial}{\partial T}\sum_{i=1}^{M}E_i e ^{ - \frac {1}{k_BT} E_i} = \frac{1}{k_BT^2}\sum_{i=1}^{M}E_i^2 e ^{ - \frac {1}{k_BT} E_i}
 \end{equation}
 
-\begin{equation}
-C_V =\frac{\partial <E>}{\partial T} = \frac{\partial}{\partial T} (\frac{1}{Z }\sum_{i=1}^{M}E_i e ^{ - \beta E_i}) = \frac{E_i}{Zk_BT^2}\sum_{i=1}^{M}E_i e ^{ - \beta E_i} -\frac{1}{Zk_BT^2}\sum_{i=1}^{M}E_i^2 e ^{ - \beta E_i} = \frac{1}{Zk_BT^2}<E^2>-<E>^2
-\end{equation}
+\begin{align}
+C_V &=\frac{\partial <E>}{\partial T} = \frac{\partial}{\partial T} \left( \frac{1}{Z }\sum_{i=1}^{M}E_i e ^{ - \frac {1}{k_BT} E_i}\right) = -\frac{1}{k_B T^2 } \frac{\sum_{i=1}^{M} E_i e^{-E_i \frac{1}{k_BT}}}{ Z^2}\sum_{i=1}^{M}E_i e ^{ - \frac {1}{k_BT} E_i} +\frac{1}{Z}\frac{1}{k_BT^2}\sum_{i=1}^{M}E_i^2 e ^{ - \frac {1}{k_BT} E_i} \\
+ &= -\frac{1}{k_B T^2 } \left( \frac{\sum_{i=1}^{M} E_i e^{-E_i \frac{1}{k_BT}}}{ Z} \right)^2 +\frac{1}{Z}\frac{1}{k_BT^2}\sum_{i=1}^{M}E_i^2 e ^{ - \frac {1}{k_BT} E_i} = \frac{1}{k_B T^2 } \left( <E>^2 - <E^2> \right)
+\end{align}
 
 \subsubsection{Ferromagnetic order}
 
