@@ -58,8 +58,8 @@ int main()
         }
         //Set array with possible energy changes according to temperature
         for(int i=0; i<5; i++){
-            double delEnergy = (4*i)-8;
             energyChanges[i] = exp(((double)-delEnergy)/((double)temp));
+            double delEnergy = (4*i)-8;
         }
         //actual Monte Carlo happens here
         for(int i=0; i<=mccycles; i++){
