@@ -95,6 +95,41 @@ C_V =\frac{\partial E}{\partial T}
 C_V &=\frac{\partial <E>}{\partial T} = \frac{\partial}{\partial T} \left( \frac{1}{Z }\sum_{i=1}^{M}E_i e ^{ - \frac {1}{k_BT} E_i}\right) = -\frac{1}{k_B T^2 } \frac{\sum_{i=1}^{M} E_i e^{-E_i \frac{1}{k_BT}}}{ Z^2}\sum_{i=1}^{M}E_i e ^{ - \frac {1}{k_BT} E_i} +\frac{1}{Z}\frac{1}{k_BT^2}\sum_{i=1}^{M}E_i^2 e ^{ - \frac {1}{k_BT} E_i} \\
  &= -\frac{1}{k_B T^2 } \left( \frac{\sum_{i=1}^{M} E_i e^{-E_i \frac{1}{k_BT}}}{ Z} \right)^2 +\frac{1}{Z}\frac{1}{k_BT^2}\sum_{i=1}^{M}E_i^2 e ^{ - \frac {1}{k_BT} E_i} = \frac{1}{k_B T^2 } \left( <E>^2 - <E^2> \right)
 \end{align}
+The magnetic susceptibility is a measurable quantity, which indicates if the material is attracted or repelled of a magnetic field.
+Magnetic materials can be classified as paramagnetic, diamagnetic or ferromagnetic based on their susceptibility.
+
+\begin{equation}
+\chi =\frac{\partial <M>}{\partial H} 
+\end{equation}
+We can evaluate the mean magnetization through:
+
+\begin{equation}
+<M> = \sum_{i}^{M}M_iP_i(\beta)= \frac{1}{Z}\sum_{i}^{M}M_ie^{- \frac{E_i}{k_BT}}
+\end{equation}
+The total energy of the system in addition of external magnetic field H can be described with:
+
+\begin{equation}
+E = -\sum_{i,j} J_{s_is_j}- H\sum_{i}s_i
+\end{equation}
+The magnetization is the sum of all spin for a given configuration:
+\begin{equation}
+\frac{\partial E_i}{\partial H} =- \sum_{i}s_i = -M_i
+\end{equation}
+
+\begin{equation}
+\frac{\partial}{\partial H}\frac{1}{Z} = \frac{\partial}{\partial H}\frac{1}{\sum_{i=1}^{M}e^{- \frac{1}{k_BT} E_i}} = -\frac{1}{k_B T} \frac{\sum_{i=1}^{M} M_i e^{-E_i \frac{1}{k_BT}}}{\left(\sum_{i=1}^{M} e^{-E_i \frac{1}{k_BT}} \right)^2}=-\frac{1}{k_B T} \frac{\sum_{i=1}^{M} M_i e^{-E_i \frac{1}{k_BT}}}{\left( Z\right)^2}
+\end{equation}
+
+\begin{equation}
+\frac{\partial}{\partial H}\sum_{i=1}^{M}M_i e ^{ - \frac {1}{k_BT} E_i} = \frac{1}{k_BT}\sum_{i=1}^{M}M_i^2 e ^{ - \frac {1}{k_BT} E_i}
+\end{equation}
+
+\begin{align}
+\chi &=\frac{\partial <M>}{\partial H} = \frac{\partial}{\partial H} \left( \frac{1}{Z }\sum_{i=1}^{M}M_i e ^{ - \frac {1}{k_BT} E_i}\right) = -\frac{1}{k_B T } \frac{\sum_{i=1}^{M} M_i e^{-E_i \frac{1}{k_BT}}}{ Z^2}\sum_{i=1}^{M}M_i e ^{ - \frac {1}{k_BT} E_i} +\frac{1}{Z}\frac{1}{k_BT}\sum_{i=1}^{M}M_i^2 e ^{ - \frac {1}{k_BT} E_i} \\
+ &= -\frac{1}{k_B T} \left( \frac{\sum_{i=1}^{M} M_i e^{-E_i \frac{1}{k_BT}}}{ Z} \right)^2 +\frac{1}{Z}\frac{1}{k_BT}\sum_{i=1}^{M}M_i^2 e ^{ - \frac {1}{k_BT} E_i} = \frac{1}{k_B T } \left( <M>^2 - <M^2> \right)
+\end{align}
+
+
 \subsubsection{Ferromagnetic order}
 % not clearly understandeble (comment by Lukas )
 A ferromagnet has a spontaneous magnetic moment even with the absence of an external magnetic field. Due the existence of a spontaneous moment the electron spin and magnetic moments must be arranged in a regular manner.
@@ -203,7 +238,7 @@ C_v &= \frac{1}{k_b T^2} \left( \frac{1}{Z} \sum_{i=1}^{M} E_i^2 e^{- \beta E_i 
 &= \frac{1}{k_b T^2} \left( \frac{64 \cdot J +3\cdot J \cdot 64 \mathrm{cosh}(8J \beta)}{\left(3+\mathrm{cosh}(8J\beta)\right)^2} \right)\\
 &= \frac{64}{k_b T^2} \left( \frac{ J +3 J \cdot \mathrm{cosh}(8J \beta)}{\left(3+\mathrm{cosh}(8J\beta)\right)^2} \right)\\
 \end{align}
-At last, we wan to have a look at the magnetic susceptibility. This quantity is a magnetic property of the material. The magnetic susceptibility describes the response of the material to an applied magnetic field. 
+At last, we want to have a look at the magnetic susceptibility. This quantity is a magnetic property of the material. The magnetic susceptibility describes the response of the material to an applied magnetic field. 
 \begin{align}
 \chi &= \frac{1}{k_b T} \cdot \left( \frac{1}{Z} \sum_{i=1}^{M} M_i^2 e^{- \beta E_i } - \left( \frac{1}{Z} \sum_{i=1}^{M} M_i e^{- \beta E_i }  \right)^2 \right)\\
 &= \frac{1}{k_b T} \cdot \left( \frac{1}{Z} \cdot \left( 4^2 \cdot 1 \cdot e^{-8J\beta}+ 2^2 \cdot 4+(-2)^2 \cdot 4 + (-4)^2 \cdot 1 \cdot e^{-8J \beta } \right) - \left( 0  \right)^2 \right)\\
