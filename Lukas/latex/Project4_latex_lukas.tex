@@ -29,9 +29,12 @@
 \newpage
 
 \section*{Introduction}
-In project 4 we are dealing with the Ising model in two dimensions without an external magnetic field. We are looking at a lattice of L times L particles, which have spinvalues $\pm 1$. In order to compute different interesting values, we want to use the metropolis algorithm.  With our computations, we want to calculate the Energy, the absolute value of the magnetisation, the heat capacity and susceptibility of the system as a function of time. We also want to compare our solutions with the theoretical closed solution. 
-We are also looking at phase transitions of our system. In our case, it will be a second order phase transition. (which in a canonial ensemble means a divergence of the heat capacity)
-This project may also show the link from statistical physics to macroscopic properties of a given physical system, which is a very interesting relation. 
+In project 4 we are dealing with the Ising model in two dimensions without an external magnetic field. We are looking at a lattice of L times L particles, where each particle has a spin value of $\pm 1$. In order to compute different interesting properties of the system, we want to use the metropolis algorithm.  With our computations, we want to calculate the Energy, the absolute value of the magnetisation, the heat capacity and susceptibility of the system as a function of temperature in order to study phase transitions of the system. 
+In our case, we want to study the phase transition from a ferromagnetic phase for low temperatures to a paramagnetic phase for high temperatures above the critical Temperature $T_c$(in a canonical ensemble this means a second order phase transition and therefore a divergence of the heat capacity at the critical Temperature).
+In order to get familiar with all the quantities, we first wan to study the case of a 2 times 2 lattice. For This lattice-size, we want to find a analytical expression for all interesting physical properties of the system and compare them with the computed values.
+However, researcher have solved the two dimensional Ising model a long time ago for any and even for infinite size.
+The Ising model in two dimensions has been solved first for any "fixed" size by Kaufman in 1949 and in the end even for a infinite size by Onsager in 1944.  (compare with "Statistical Mechanics: Algorithms and Computations; Werner Krauth; published 2006")
+This project may also show the link from statistical physics to macroscopic properties of a given physical system, which is a interesting relation.
 \section{Theory}
 
 \subsection{General properties of physical systems and their link to statistical physics}
@@ -246,9 +249,16 @@ At last, we want to have a look at the magnetic susceptibility. This quantity is
 &= \frac{1}{k_b T} \cdot \frac{8 e^{-8J\beta}+8}{ 3+ \cdot \mathrm{cosh} \left( 8J \beta \right)}\\
 \end{align}
 
-\subsection{infinite size effect}
-%Lukas will do this, have to talk with computational gys first
+\begin{align}
+\chi_{abs} &= \frac{1}{k_b T} \cdot \left( \frac{1}{Z} \sum_{i=1}^{M} M_i^2 e^{- \beta E_i } - \left( \frac{1}{Z} \sum_{i=1}^{M} |M_i| e^{- \beta E_i }  \right)^2 \right)\\
+&= \frac{1}{k_b T} \cdot \left( \frac{1}{Z} \cdot \left( 4^2 \cdot 1 \cdot e^{-8J\beta}+ 2^2 \cdot 4+(-2)^2 \cdot 4 + (-4)^2 \cdot 1 \cdot e^{-8J \beta } \right) - \left( \frac{2 \cdot e^{-8J\beta}+2}{3+ \mathrm{cosh}(8J\beta)} \right)^2 \right)\\
+&= \frac{1}{k_b T} \cdot \left( \frac{32 e^{-8J\beta}+32}{ 12+ 4 \cdot \mathrm{cosh} \left( 8J \beta \right)}- \left( \frac{2 \cdot e^{-8J\beta}+2}{3+ \mathrm{cosh}(8J\beta)} \right)^2 \right)\\
+&= \frac{1}{k_b T} \cdot \left(\frac{8 e^{-8J\beta}+8}{ 3+ \cdot \mathrm{cosh} \left( 8J \beta \right)}- \left( \frac{2 \cdot e^{-8J\beta}+2}{3+ \mathrm{cosh}(8J\beta)} \right)^2 \right)\\
+&=\frac{1}{k_b T} \cdot \frac{16 (e^{8 J \beta}+1) (5 e^{8 \beta J}+e^{16 \beta J})}{(6 e^{8 \beta J}+e^{16 \beta J}+1)^2} 
+\end{align}
+
 \subsection{everything related to parts d and later}
+
 
 This part is not structured yet
 %Lukas will do this
