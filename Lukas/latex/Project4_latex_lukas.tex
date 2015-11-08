@@ -42,17 +42,7 @@ Let us now look at a physical system and its surroundings.
 In principle, it is necessary to describe the relation of the physical system and its surroundings in order to determine the properties of the system.(sometimes this relations are related to physical boundary conditions) It is necessary to know whether we want to allow for instance particle/heat exchange or not. How we set up our system also defines us the thermodynamic potential, which can be used to describe the system.(e.g. Entropy, Helmholtz,Gibbs) All in all, we have the Microcanonical ensemble, the canonical ensemble, the Grandcanonical ensemble and the pressure canonical ensemble. (in this case an ensemble means a collection of mircoscopic systems, compare with the lecture notes Computational physics 2015 at University of Oslo by Morten Hjorth-Jensen page 417 )
 In the following, we will always deal with the canonical ensemble. This  means that we don't allow particle exchange from the system with its surroundings, but we allow exchange of heat with the environment. 
 Fixed variables are in this case the temperature, the total volume and the total particle number. The total energy of the canonical ensemble is not constant, because there can be heat exchange with the surroundings. The system, which does not allow heat exchange and does not allow particle exchange is called micro-canonical ensemble. (compare "Statistical Mechanics  An Intermediate Course; 2nd Edition; G. Morandi/F. Napoli/ E. Ercolessi; page 94ff") 
-The probability distribution is given by the Boltzmann distribution.
 
-\begin{align}
-P_i (\beta) =\frac{ e^{- \beta E_i}}{Z}
-\end{align} 
-$\beta = 1/k_B T$ where T is the temperature, $k_B$ is the Boltzmann constant,$E_i$ is the energy of micro state i and Z is the partition function for the canonical ensemble is the sum over all the micro states M.
-
-\begin{equation}
-  Z=\sum_{i=1}^{M}e^{- \beta E_i}
-\end{equation}
-   
 
 \subsubsection{General properties of canonical ensembles}\label{General properties of canonical ensembles}
 %Lukas changed this; newest version 08.11.15
@@ -66,7 +56,17 @@ S=-k_BlnZ + k_B T \frac{\partial lnZ}{\partial T}\label{S}
 \end{equation}
 We can see that $F$ depends on the expectation value of the Energy and on $-TS$. 
 Hence, the canonical ensemble pursuits towards an energy minimum and higher entropy. This can be interpreted as a "struggle between two important principles in physics"( lecture notes Computational physics 2015 at University of Oslo by Morten Hjorth-Jensen page 419 )
+The probability distribution for a canonical ensemble is given by the Boltzmann distribution.
 
+\begin{align}
+P_i (\beta) =\frac{ e^{- \beta E_i}}{Z}
+\end{align} 
+$\beta = 1/k_B T$ where T is the temperature, $k_B$ is the Boltzmann constant,$E_i$ is the energy of micro state i and Z is the partition function for the canonical ensemble is the sum over all the micro states M.
+
+\begin{equation}
+  Z=\sum_{i=1}^{M}e^{- \beta E_i}
+\end{equation}
+   
 After running the system for long time the canonical ensemble is uniquely determined and does not depend on the arbitrary choices of the initial temperature.
 The system uncertainty due the Energy fluctuations in the canonical ensemble gives the variance of the energy.\\
  
