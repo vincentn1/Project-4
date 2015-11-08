@@ -30,28 +30,33 @@
 
 \section*{Introduction}
 In project 4 we are dealing with the Ising model in two dimensions without an external magnetic field. We are looking at a lattice of L times L particles, which have spinvalues $\pm 1$. In order to compute different interesting values, we want to use the metropolis algorithm.  With our computations, we want to calculate the Energy, the absolute value of the magnetisation, the heat capacity and susceptibility of the system as a function of time. We also want to compare our solutions with the theoretical closed solution. 
+We are also looking at phase transitions of our system. In our case, it will be a second order phase transition. (which in a canonial ensemble means a divergence of the heat capacity)
 This project may also show the link from statistical physics to macroscopic properties of a given physical system, which is a very interesting relation. 
 \section{Theory}
 
 \subsection{General properties of physical systems and their link to statistical physics}
 
 \subsubsection{physical ensembles}
-%Lukas particl exchange not fix temp %chanonical 
-Canonical ensemble is a statistical way to represents the possible states in a system with fixed temperature, whereas the system exchange energy, the energy follows as an expectation value. The probability distribution is given by the Boltzmann distribution.
+%Lukas changed this; newest version 08.11.15
+Let us now look at a physical system and its surroundings. 
+In principle, it is necessary to describe the relation of the physical system and its surroundings in order to determine the properties of the system.(sometimes this relations are related to physical boundary conditions) It is necessary to know whether we want to allow for instance particle/heat exchange or not. How we set up our system also defines us the thermodynamic potential, which can be used to describe the system.(e.g. Entropy, Helmholtz,Gibbs) All in all, we have the Microcanonical ensemble, the canonical ensemble, the Grandcanonical ensemble and the pressure canonical ensemble. (in this case an ensemble means a collection of mircoscopic systems, compare with the lecture notes Computational physics 2015 at University of Oslo by Morten Hjorth-Jensen page 417 )
+In the following, we will always deal with the canonical ensemble. This  means that we don't allow particle exchange from the system with its surroundings, but we allow exchange of heat with the environment. 
+Fixed variables are in this case the temperature, the total volume and the total particle number. The total energy of the canonical ensemble is not constant, because there can be heat exchange with the surroundings. The system, which does not allow heat exchange and does not allow particle exchange is called micro-canonical ensemble. (compare "Statistical Mechanics  An Intermediate Course; 2nd Edition; G. Morandi/F. Napoli/ E. Ercolessi; page 94ff") 
+The probability distribution is given by the Boltzmann distribution.
 
 \begin{align}
 P_i (\beta) =\frac{ e^{- \beta E_i}}{Z}
 \end{align} 
-$\beta = 1/k_B T$ where T is the temperature, $k_B$ is the Bolztmann constant,$E_i$ is the energy of microstate i and Z is the partition function for the canonical ensemble is the sum over all the microstates M.
+$\beta = 1/k_B T$ where T is the temperature, $k_B$ is the Boltzmann constant,$E_i$ is the energy of micro state i and Z is the partition function for the canonical ensemble is the sum over all the micro states M.
 
 \begin{equation}
   Z=\sum_{i=1}^{M}e^{- \beta E_i}
 \end{equation}
    
 
-\subsubsection{General properties of canonical ensembles}
-the canonical ensemble pursuit towards an energy minimum and higher entropy expressed by Helmholtz' free energy.
-
+\subsubsection{General properties of canonical ensembles}\label{General properties of canonical ensembles}
+%Lukas changed this; newest version 08.11.15
+The canonical ensemble can be expressed by Helmholtz' free energy. The system strives to a minimum of Helmholtz' free energy, which is defined as follows:
 \begin{equation}
 F=-k_BTlnZ = <E>-TS \label{F}
 \end{equation}
@@ -59,9 +64,15 @@ where the entropy S is given by
 \begin{equation}
 S=-k_BlnZ + k_B T \frac{\partial lnZ}{\partial T}\label{S}
 \end{equation}
-after running the system for long time the canonical ensemble is uniquely determined and does not depend on the arbitrary choices for a given temperature, having a steady state without being affected by the equilibrium continuous motion.
-the system uncertainty  due the Energy fluctuations in the canonical ensemble give the variance of the energy.\\
+We can see that $F$ depends on the expectation value of the Energy and on $-TS$. 
+Hence, the canonical ensemble pursuits towards an energy minimum and higher entropy. This can be interpreted as a "struggle between two important principles in physics"( lecture notes Computational physics 2015 at University of Oslo by Morten Hjorth-Jensen page 419 )
+
+After running the system for long time the canonical ensemble is uniquely determined and does not depend on the arbitrary choices of the initial temperature.
+The system uncertainty due the Energy fluctuations in the canonical ensemble gives the variance of the energy.\\
  
+%from here on,  Richards actual part
+
+
 \centerline{ from equation \ref{F}, \ref{S} and probability distribution $P_i$ }
 \begin{align}
 <E> = k_b T^2 \frac{\partial lnZ}{\partial T}=\sum_{i=1}^{M} E_iP_i(\beta)=\frac{1}{Z }\sum_{i=1}^{M}E_i e ^{ - \beta E_i}
@@ -85,12 +96,18 @@ C_V &=\frac{\partial <E>}{\partial T} = \frac{\partial}{\partial T} \left( \frac
  &= -\frac{1}{k_B T^2 } \left( \frac{\sum_{i=1}^{M} E_i e^{-E_i \frac{1}{k_BT}}}{ Z} \right)^2 +\frac{1}{Z}\frac{1}{k_BT^2}\sum_{i=1}^{M}E_i^2 e ^{ - \frac {1}{k_BT} E_i} = \frac{1}{k_B T^2 } \left( <E>^2 - <E^2> \right)
 \end{align}
 \subsubsection{Ferromagnetic order}
-
-A ferromagnet have a spontaneous magnetic moment even with the absence of an external magnetic field. Due the existence of a spontaneous moment the electron spin and magnetic moments must be arranged in a regular manner.
-ferromagnet all spin aligned, antiferromagnet all spin align with neighboring pointing in opposite directions, ferrimagnet the opposing moments are unequal , etc.
+% not clearly understandeble (comment by Lukas )
+A ferromagnet has a spontaneous magnetic moment even with the absence of an external magnetic field. Due the existence of a spontaneous moment the electron spin and magnetic moments must be arranged in a regular manner.
+Ferromagnet all spin aligned, anti ferromagnet all spin align with neighbouring pointing in opposite directions, ferromagnet the opposing moments are unequal , etc.
 
 \subsubsection{link from the Macroscopic values to statistical physics}
-%Lukas will do this
+%Lukas newest upgrade 08.11.15
+In chapter \ref{General properties of canonical ensembles}, we derived the expression of the heat capacity and of the magnetic susceptibility of a canonical ensemble. We didn't care about statistical properties. However, what strikes the eye is that in the expression of the heat capacity as well as in the expression of the magnetic susceptibility, we see that they both depend on the variance of the energy of the magnetisation. this means that they can be written as:
+\begin{align}
+C_v &= \frac{1}{k_B T^2}\cdot \mathrm{Var(E)}\\
+\chi &= \frac{1}{k_B T} \cdot \mathrm{Var(M)}
+\end{align}
+The variance measures how far away a set of numbers is spread out. A huge variance means then that the values of the quantity fluctuate a lot around the expectation value.  Now, we have linked a statistical property to a thermodynamic and macroscopic such as heat capacity. 
 \subsection{theoretical numerical solutions}
 
 \subsubsection{Ising model}
@@ -102,7 +119,7 @@ where the sin s can be in two states +1 or -1,where  $s_k$ and $s_l$ are the nea
 \begin{equation}
   E=-J\sum_{<kl>}^{N}s_ks_l
 \end{equation}
-...probability distribution with expectation value <E> ...
+
   
   \subsubsection{Periodic boundary conditions} 
 Periodic boundary conditions is used for approximating a large or infinite system by using smaller repeating system, we will impose PBCs on our spin lattice in x and y directions.
@@ -195,8 +212,8 @@ At last, we wan to have a look at the magnetic susceptibility. This quantity is 
 \end{align}
 
 \subsection{infinite size effect}
-%Lukas will do this
-\subsection{everything related to parts c and later}
+%Lukas will do this, have to talk with computational gys first
+\subsection{everything related to parts d and later}
 
 This part is not structured yet
 %Lukas will do this
