@@ -1,0 +1,43 @@
+\documentclass[10pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[english]{babel}
+\usepackage[T1]{fontenc}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{makeidx}
+\usepackage{graphicx}
+\usepackage{fourier}
+\usepackage{listings}
+\usepackage{color}
+\usepackage{hyperref}
+\usepackage[left=2cm,right=2cm,top=2cm,bottom=2cm]{geometry}
+\author{Johannes Scheller, Vincent Noculak, Lukas Powalla, Richard Asbah}
+\title{Computational Physics - Project 4}
+
+\lstset{language=C++,
+	keywordstyle=\bfseries\color{blue},
+	commentstyle=\itshape\color{red},
+	stringstyle=\color{green},
+	identifierstyle=\bfseries,
+	frame=single}
+\begin{document}
+
+\maketitle
+\newpage
+\tableofcontents
+\newpage
+
+\section*{Introduction}
+
+\section{Theory}
+
+\section{Execution}
+\subsection{Implementing the Algorithm}
+\subsection{Results}
+As a first benchmark test for our program, we calculated the expectation values $<E>$, $<|M>|$, $<C_V>$ and $<\chi>$ of a $2\times2$-lattice for different temperatures. Those results could be easily compared to the analytical values from the part \ref{closed_solution}. In fig. \ref{b_E} - \ref{b_chi}, you can see our results for these expectation values compared with the analytical solutions as functions of $T$. We only needed about $NNNN$ Monte Carlo cycles to get achieve good results for this lattice size!
+\section{Comparison and discussion of results}
+
+\section{source code}
+
+\end{document}
