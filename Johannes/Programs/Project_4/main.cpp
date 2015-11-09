@@ -14,7 +14,8 @@ using namespace std;
 double random(int &seed);
 void initialize(int size, int** grid, bool isRandom, long idum, double& M, double& E);
 void readInput(double& tempStart, double& tempMax, double& tempStep, int& size, int& mccycles, bool& isRandomSetup);
-void monteCarlo(int** spinArray, int size, long& idum, double* energyDeltas, double& M, double& E);
+void monteCarlo(int** spinArray, int size, long& idum, double* energyDeltas, double& M, double& E, int& accept);
+void thermalization (int** spinArray, int size, long& idum, double* energyDeltas, double& M, double& E, int& accept);
 void output(int size, int cycles, double temp, double* averages);
 ofstream ofile;
 
@@ -26,7 +27,7 @@ int main()
      * Initializing everything
      */
     //declare variables
-    int size, mccycles;
+    int size, mccycles, acceptedmoves;
     long idum;
     double tempStart, tempMax, tempStep, M, E;
     double energyChanges[5], averages[5];
@@ -37,7 +38,7 @@ int main()
     idum = -((long)seed);
     //for output file...
     ofile.open("output.txt");
-    ofile << "size" << "\t\t" << "cycles" << "\t\t" << "temp" << "\t\t" << "E" << "\t\t" << "E²" << "\t\t" << "M" << "\t\t" << "M²" << "\t\t" << "|M|" << endl;
+    ofile << "#size" << "\t\t" << "cycles" << "\t\t" << "temp" << "\t\t" << "<E>" << "\t\t" << "<C_v>" << "\t\t" << "<|M|>" << "\t\t" << "<chi>" << endl;
     //read input from screen, see function
     readInput(tempStart, tempMax, tempStep, size, mccycles, isRandomSetup);
     //set up array with spins; 'matrix' is from Morten's lib.cpp
@@ -52,6 +53,7 @@ int main()
      */
     //loop over desired temperature range
     for (temp=tempStart; temp<=tempMax; temp+=tempStep){
+        acceptedmoves=0;
         //reset Energy and magnetization (averages)
         for(int i=0; i<5; i++){
             averages[i]=0;
@@ -61,16 +63,22 @@ int main()
             double delEnergy = (4*i)-8;
             energyChanges[i] = exp(((double)-delEnergy)/((double)temp));
         }
+        //thermalization - comment out for exercices where thermalization behaviour should be studied!
+        thermalization(spinArray, size, idum, energyChanges, M, E, acceptedmoves);
         //actual Monte Carlo happens here
-        for(int i=0; i<=mccycles; i++){
-            monteCarlo(spinArray, size, idum, energyChanges, M, E);
+        for(int i=0; i<mccycles; i++){
+            monteCarlo(spinArray, size, idum, energyChanges, M, E, acceptedmoves);
             averages[0]+=E;
             averages[1]+=E*E;
             averages[2]+=M;
             averages[3]+=M*M;
             averages[4]+=abs((int)M);
+            //Only for c), otherwise comment next line out (very slow!)
+            //output(size, i+1, temp, averages);
+            //only for c) (second part); comment out if not used!
+            //ofile << i << "\t" << acceptedmoves << endl;
         }
-        //output of data for this temperature
+        //output of data for this temperature (comment out if not used!)
         output(size, mccycles, temp, averages);
     }
 
@@ -93,7 +101,7 @@ void initialize(int size, int** grid, bool isRandom, long idum, double& M, doubl
         //initialize randomly
         for(i=0; i<size; i++){
             for(j=0; j<size; j++){
-                if(ran3(&idum)>0.5){grid[i][j]=1;}else{grid[i][j]=1;}
+                if(ran3(&idum)>0.5){grid[i][j]=-1;}else{grid[i][j]=1;}
             }}}else{
         //all spins up!
         for(i=0; i<size; i++){
@@ -132,7 +140,7 @@ void readInput(double& tempStart, double& tempMax, double& tempStep, int& size, 
 }
 
 //This is the actual Monte Carlo method as described in the report!
-void monteCarlo(int** spinArray, int size, long& idum, double* energyDeltas, double& M, double& E){
+void monteCarlo(int** spinArray, int size, long& idum, double* energyDeltas, double& M, double& E, int& accept){
     int count;
     for(count=0; count<=(size*size); count++){
         //Pick random position
@@ -148,13 +156,43 @@ void monteCarlo(int** spinArray, int size, long& idum, double* energyDeltas, dou
             //update energy and magnetization
             M+=2*spinArray[x][y];
             E+=deltaE;
+            //count accepted move! (needed for one part)
+            accept++;
         }
     }
     return;
 }
 
+//This method performs MC until the system is in the most likely state
+//To check this, it compares the energy before and after the 10 cycles. Loop is performed until (E'-E)<0.01*E' (1% difference)
+void thermalization (int** spinArray, int size, long& idum, double* energyDeltas, double& M, double& E, int& accept) {
+    int Etemp;
+    do {
+        Etemp = E;
+        for(int i=0; i<10; i++){
+            monteCarlo(spinArray, size, idum, energyDeltas, M, E, accept);
+        }
+    }while((abs(E-Etemp))>(abs(E*0.01)));
+
+}
+
 //This method prints the data of the Monte Carlo method for on setup to previously selected output file
 void output(int size, int cycles, double temp, double* averages){
-    ofile << setprecision(1) << fixed << size << "\t\t" << cycles << "\t\t" << temp << "\t\t" << setprecision(5) << averages[0]/cycles << "\t" << averages[1]/cycles << "\t" << averages[2]/cycles << "\t\t" << averages[3]/cycles << "\t" << averages[4]/cycles << endl;
+    ofile << setprecision(2)<< fixed;
+    //size of lattice, number of cycles and temperature
+    ofile << size <<  "\t\t" << cycles << "\t\t" << temp;
+    ofile << setprecision(6);
+    //Energy of the system
+    double energy = averages[0]/cycles;
+    ofile << "\t\t" << energy;
+    //heat capacity <E^2>-<E>^2
+    double heatcap = (averages[1]/cycles)-(energy*energy);
+    ofile << "\t" << heatcap;
+    //absolute value of Magnetization
+    double abs_magnetization = averages[4]/cycles;
+    ofile << "\t" << abs_magnetization;
+    //susceptibility <M^2>-<M>^2
+    double suscept = (averages[4]/cycles)-((averages[2]/cycles)*(averages[2]/cycles));
+    ofile << "\t" << suscept << endl;
     return;
 }
