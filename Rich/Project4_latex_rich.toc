@@ -8,7 +8,7 @@
 \contentsline {subsection}{\numberline {1.2}theoretical numerical solutions}{4}{subsection.1.2}
 \contentsline {subsubsection}{\numberline {1.2.1}Ising model}{4}{subsubsection.1.2.1}
 \contentsline {subsubsection}{\numberline {1.2.2}Periodic boundary conditions}{5}{subsubsection.1.2.2}
-\contentsline {subsubsection}{\numberline {1.2.3}Metropolis algorithm}{5}{subsubsection.1.2.3}
+\contentsline {subsubsection}{\numberline {1.2.3}Metropolis algorithm in the two dimensional Ising model}{5}{subsubsection.1.2.3}
 \contentsline {subsubsection}{\numberline {1.2.4}critical temperature (Lars Onsager)}{5}{subsubsection.1.2.4}
 \contentsline {subsection}{\numberline {1.3}Closed solution for a 2 dimensional 2 x 2 lattice}{5}{subsection.1.3}
 \contentsline {subsection}{\numberline {1.4}infinite size effect}{7}{subsection.1.4}
