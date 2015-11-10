@@ -155,7 +155,51 @@ it's difficult to compute since we need the sum of all stats, if we have a 10 x 
 
 
 \subsubsection{critical temperature (Lars Onsager)}
-% Richi, It's ur turn
+in 1944 the Norwegian chemist Lars Onsager made very important discovery in theoretical physics, namely the exact solution of the Ising spin model in two dimensions, his work stands to this day, Onsager's solutions achieved the thermodynamic properties of interaction systems and phase transitions at $T_c$. however in 1942 Lars Onsager solved the two dimensional model for zero field energy which been published two years after, in 1948 he wrote the solution for the zero field magnetization in a conference at Cornell. however Onsager showed that the partition function for the canonical ensemble with zero external magnetic field Z(B = 0,T)with N spins.
+\begin{align}
+ Z_N =  \left( 2 cosh(\beta J)e^{I} \right)^N 
+\end{align}
+where $ I = \frac{1}{2\pi} \int_{0}^{\pi} d \phi ln \bigg[ \frac{1}{2} \left( 1 + \sqrt{1-\kappa^2 sin ^2 \phi} \right) \bigg]$
+where $\kappa = \frac {2sinh(2\beta J)}{cosh^2(2\beta J)}$
+and the energy is given by
+\begin{align}
+ <E> = -Jcoth(2\beta J) \bigg[ 1+\frac{2}{\pi}(2tanh^2(2\beta J)-1)K_1(q) \bigg] 
+\end{align}
+where $q = sinh(2\beta J)/cosh^2(2\beta J)$ and the complete elliptic integral of the first kind
+\begin{align}
+k_1(q) = \int_{0}^{\frac{\pi}{2}} \frac{d\phi}{\sqrt{1-q^2sin^2 \phi}} 
+\end{align}
+and differentiating the energy with the respect to temperature we obtain the specific heat 
+
+\begin{align}
+C_v = \frac{\partial <E>}{\partial T} = \frac{4K_B}{\pi}(\beta J coth(2\beta J) )^2 \bigg\{ K_1(q)-K_2(q)-(1-tanh^2(2\beta J))\bigg[ \frac{\pi}{2}+(2tanh^2(2\beta J)-1 )K_1(q) \bigg] \bigg\}
+\end{align}
+where 
+\begin{align}
+k_2(q) = \int_{0}^{\frac{\pi}{2}} d \phi \sqrt{1-q^2sin^2\phi}
+\end{align}
+near the critical temperature $T_c$ the specific heat behaves as 
+\begin{align}
+C_v \approx -\frac{2}{\pi}\left( (\frac{2J}{K_BT_c}\right)^2 ln \Bigg[ 1- \frac{T}{T_c}\Bigg]+ const.
+\end{align}
+
+\begin{align}
+C_v \sim \Bigg[ 1- \frac{T}{T_c}\Bigg]^{\alpha}
+\end{align}
+the limiting form of the function
+\begin{align}
+\lim_{\alpha \to 0} \frac{1}{\alpha}(Y^{-\alpha}-1)=-lnY
+\end{align}
+can be used to infer that closed-form result in low singularity with $\alpha = 0.$
+list of Onsager's result
+
+\begin{align}
+<\frac{M(T)}{N}> = \Bigg[ 1- \frac{(1 - tanh ^2(\beta J))^{4}}{16tanh^{4}(\beta J)} \Bigg] ^{\frac{1}{8}} 
+\end{align}
+for $T<T_c.$ otherwise the magnetization is zero 
+"lecture notes Computational physics 2015 at University of Oslo by Morten Hjorth-Jensen page 435)" 
+
+
 \subsection{Closed solution for a 2 dimensional 2 x 2 lattice}
 
 We want now to look at a 2 x 2 lattice and we want to calculate the partition function, the energy, magnetisation, heat capacity and susceptibility of the system  dependent of T. 
