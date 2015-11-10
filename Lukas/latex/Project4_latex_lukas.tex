@@ -30,7 +30,7 @@
 
 \section*{Introduction}
 In project 4 we are dealing with the Ising model in two dimensions without an external magnetic field. We are looking at a lattice of L times L particles, where each particle has a spin value of $\pm 1$. In order to compute different interesting properties of the system, we want to use the metropolis algorithm.  With our computations, we want to calculate the Energy, the absolute value of the magnetisation, the heat capacity and susceptibility of the system as a function of temperature in order to study phase transitions of the system. 
-In our case, we want to study the phase transition from a ferromagnetic phase for low temperatures to a paramagnetic phase for high temperatures above the critical Temperature $T_c$(in a canonical ensemble this means a second order phase transition and therefore a divergence of the heat capacity at the critical Temperature).
+In our case, we want to study the phase transition from a ordered phase for low temperatures to a disordered phase for high temperatures above the critical Temperature $T_c$(in a canonical ensemble this means a second order phase transition and therefore a divergence of the heat capacity at the critical Temperature).
 In order to get familiar with all the quantities, we first wan to study the case of a 2 times 2 lattice. For This lattice-size, we want to find a analytical expression for all interesting physical properties of the system and compare them with the computed values.
 However, researcher have solved the two dimensional Ising model a long time ago for any and even for infinite size.
 The Ising model in two dimensions has been solved first for any "fixed" size by Kaufman in 1949 and in the end even for a infinite size by Onsager in 1944.  (compare with "Statistical Mechanics: Algorithms and Computations; Werner Krauth; published 2006")
@@ -136,7 +136,9 @@ The magnetization is the sum of all spin for a given configuration:
 \subsubsection{Ferromagnetic order}
 % not clearly understandeble (comment by Lukas )
 A ferromagnet has a spontaneous magnetic moment even with the absence of an external magnetic field. Due the existence of a spontaneous moment the electron spin and magnetic moments must be arranged in a regular manner.
-Ferromagnet all spin aligned, anti ferromagnet all spin align with neighbouring pointing in opposite directions, ferromagnet the opposing moments are unequal , etc.
+In a ferromagnet most of the spins are aligned and in an  anti ferromagnet the most of neighbouring spins are pointing in opposite directions.
+(compare "Introduction to Solid States Physics- 8th edition, by Charles kittel, page 323)
+In general -in a ferromagnet- spins up want to be next to spin up and spin downs want to be next to spin downs. At low temperature, the spin system is magnetised (either mostly up or mostly down). However, at high temperatures above the critical temperature, up and down spins are equally likely and the spins will in total cancel each other out. (total magnetisations is zero)
 
 \subsubsection{link from the Macroscopic values to statistical physics}
 %Lukas newest upgrade 08.11.15
@@ -166,10 +168,61 @@ Periodic boundary conditions is used for approximating a large or infinite syste
  
  s(x,L+1) = s(X,1)  
 
-\subsubsection{Metropolis algorithm}
-%Richi... it's ur turn ;)
-\subsubsection{critical temperature (Lars Onsager)}
-% Richi, It's ur turn
+
+\subsubsection{Metropolis algorithm in the two dimensional Ising model}
+The Ising model with Metropolis algorithm generates a sequence of states with Monte Carlo path, where the transition between states depends on the transition probability between the next and current state. The probability distribution is given by the Boltzmann distribution which is the probability for finding the system in a state s.
+\begin{align}
+Ps =\frac{ e^{- \beta E_i}}{\sum_{i=1}^{M}e^{- \beta E_i}}
+\end{align}
+It is difficult to compute since we need the sum over all states. If we have a 10 x 10 spin lattice interacting in our Ising model, there are $2^{100}$ possible states. Computing the sum seems to be not that efficient, but luckily the Metropolis algorithm needs only the ratios between the state probabilities and we do not need to compute the sum of all the states after all. The Metropolis algorithm in this case can be implement by establishing two dimensional Ising model with random lattice configuration. Then we flip a randomly chosen spin and compute the energy difference $\Delta E$. If $\Delta E \leq 0$ we accept the flip, otherwise we compute the transition probability $w = e^-{\beta \Delta E}$ and compare with a random number r.\\If $r \leq w$ we accept the flip otherwise we keep the old configuration. We can keep choosing new random spins until we are satisfied with a good representation of the states.(compare to"lecture notes Computational physics 2015 at University of Oslo by Morten Hjorth-Jensen page 435)"   
+
+
+\subsubsection{Critical temperature (Lars Onsager)}
+in 1944 the Norwegian chemist Lars Onsager made very important discovery in theoretical physics, namely the exact solution of the Ising spin model in two dimensions. His work is up to now a valid theoretical description of the two dimensional Ising model. Onsager's solutions achieved the thermodynamic properties of interaction systems and phase transitions at $T_c$. However in 1942 Lars Onsager solved the two dimensional model for zero field energy, which has been published two years after. In 1948, he wrote the solution for the zero field magnetization in a conference at Cornell. Onsager showed how to derive the partition function for the canonical ensemble with zero external magnetic field Z(B = 0,T)with N spins.
+\begin{align}
+ Z_N =  \left( 2 cosh(\beta J)e^{I} \right)^N 
+\end{align}
+where $ I = \frac{1}{2\pi} \int_{0}^{\pi} d \phi ln \bigg[ \frac{1}{2} \left( 1 + \sqrt{1-\kappa^2 sin ^2 \phi} \right) \bigg]$
+where $\kappa = \frac {2sinh(2\beta J)}{cosh^2(2\beta J)}$
+and the energy is given by
+\begin{align}
+ <E> = -Jcoth(2\beta J) \bigg[ 1+\frac{2}{\pi}(2tanh^2(2\beta J)-1)K_1(q) \bigg] 
+\end{align}
+where $q = sinh(2\beta J)/cosh^2(2\beta J)$ and the complete elliptic integral of the first kind is:
+\begin{align}
+k_1(q) = \int_{0}^{\frac{\pi}{2}} \frac{d\phi}{\sqrt{1-q^2sin^2 \phi}} 
+\end{align}
+and differentiating the energy with the respect to temperature we obtain the specific heat:
+
+\begin{align}
+C_v = \frac{\partial <E>}{\partial T} = \frac{4K_B}{\pi}(\beta J coth(2\beta J) )^2 \bigg\{ K_1(q)-K_2(q)-(1-tanh^2(2\beta J))\bigg[ \frac{\pi}{2}+(2tanh^2(2\beta J)-1 )K_1(q) \bigg] \bigg\}
+\end{align}
+where 
+\begin{align}
+k_2(q) = \int_{0}^{\frac{\pi}{2}} d \phi \sqrt{1-q^2sin^2\phi}
+\end{align}
+Near the critical temperature $T_c$ the specific heat behaves as:
+\begin{align}
+C_v \approx -\frac{2}{\pi}\left( (\frac{2J}{K_BT_c}\right)^2 ln \Bigg[ 1- \frac{T}{T_c}\Bigg]+ const.
+\end{align}
+
+\begin{align}
+C_v \sim \Bigg[ 1- \frac{T}{T_c}\Bigg]^{\alpha}
+\end{align}
+the limiting form of the function
+\begin{align}
+\lim_{\alpha \to 0} \frac{1}{\alpha}(Y^{-\alpha}-1)=-lnY
+\end{align}
+can be used to infer that closed-form result in low singularity with $\alpha = 0.$
+Onsager's result can be written as:
+
+\begin{align}
+<\frac{M(T)}{N}> = \Bigg[ 1- \frac{(1 - tanh ^2(\beta J))^{4}}{16tanh^{4}(\beta J)} \Bigg] ^{\frac{1}{8}} 
+\end{align}
+for $T<T_c.$ otherwise the magnetization is zero 
+"lecture notes Computational physics 2015 at University of Oslo by Morten Hjorth-Jensen page 435)" 
+
+
 \subsection{Closed solution for a 2 dimensional 2 x 2 lattice}
 
 We want now to look at a 2 x 2 lattice and we want to calculate the partition function, the energy, magnetisation, heat capacity and susceptibility of the system  dependent of T. 
@@ -257,11 +310,6 @@ At last, we want to have a look at the magnetic susceptibility. This quantity is
 &=\frac{1}{k_b T} \cdot  \frac{4 (3+4 \mathrm{cosh}(8 J \beta)-10 \mathrm{sinh}(8 J \beta)-2 \mathrm{sinh}(16 J \beta))}{(3+\mathrm{cosh}(8 J \beta))^2}
 \end{align}
 
-\subsection{everything related to parts d and later}
-
-
-This part is not structured yet
-%Lukas will do this
 \section{Execution}
 
 \section{Comparison and discussion of results}

@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2015.11.6)  10 NOV 2015 17:44
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2015.11.6)  10 NOV 2015 18:48
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1050,11 +1050,11 @@ Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 294.
 Here is how much of TeX's memory you used:
  9471 strings out of 493085
  133462 string characters out of 6136917
- 257367 words of memory out of 5000000
+ 259367 words of memory out of 5000000
  12690 multiletter control sequences out of 15000+600000
  77946 words of font info for 97 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 33i,12n,58p,1020b,349s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 33i,12n,58p,1059b,353s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/usr/share/texlive/texmf-dist/fonts/enc/dvips/base/8r.enc}</usr/share/texliv
 e/texmf-dist/fonts/type1/public/fourier/fourier-mex.pfb></usr/share/texlive/tex
 mf-dist/fonts/type1/public/fourier/fourier-ml.pfb></usr/share/texlive/texmf-dis
@@ -1063,7 +1063,7 @@ nts/type1/public/fourier/fourier-ms.pfb></usr/share/texlive/texmf-dist/fonts/ty
 pe1/adobe/utopia/putb8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/adobe/ut
 opia/putr8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/adobe/utopia/putri8a
 .pfb>
-Output written on Project4_latex_rich.pdf (8 pages, 96484 bytes).
+Output written on Project4_latex_rich.pdf (8 pages, 96633 bytes).
 PDF statistics:
  245 PDF objects out of 1000 (max. 8388607)
  225 compressed objects within 3 object streams
