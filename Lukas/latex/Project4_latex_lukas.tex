@@ -207,7 +207,7 @@ C_v \approx -\frac{2}{\pi}\left( (\frac{2J}{K_BT_c}\right)^2 ln \Bigg[ 1- \frac{
 \end{align}
 
 \begin{align}
-C_v \sim \Bigg[ 1- \frac{T}{T_c}\Bigg]^{\alpha}
+C_v \sim \Bigg| 1- \frac{T}{T_c}\Bigg|^{\alpha}
 \end{align}
 the limiting form of the function
 \begin{align}
@@ -239,10 +239,20 @@ This gives us:
 0&=\mathrm{tanh}(\beta J )^2+2 \cdot \mathrm{tanh}(\beta J ) -1 \\
 \mathrm{tanh}(J \beta ) &= \frac{-2 \pm \sqrt{4+4}}{2} = -1 \pm \sqrt{2}\\
 \beta J &= \mathrm{arctanh}(-1 \pm \sqrt{2})\\
-&= - \frac{1}{2} ln(1+\sqrt{2})\\
+&= \frac{1}{2} ln(1+\sqrt{2})\\
 \Rightarrow \frac {k_B T_c}{J} &= \frac{2}{ln(1+\sqrt{2})}\approx 2.2692
 \end{align}
-
+Now, we found the critical temperature of 2.2692 (dimensionless unit)
+Near the critical temperature, we can describe the behaviour of the different quantities through the so called "power law". However, we want not dive deeper into this topic and name just specific results, which can be derived with this method.
+\begin{align}
+<M(T)> & \propto (T-T_c)^{\frac{1}{8}}\\
+C_v & \propto \left| T_c - T \right|^{\alpha}\\
+\chi ( t)& \propto \left| T_c - T \right|^{\gamma}\\
+\end{align}
+with $\alpha=0, \gamma=\frac{7}{4} $. In addition to that, we can describe the correlation length of the system by $\xi(T) $:
+\begin{align}
+\xi (T) \propto \left| T_c - T \right|^{-\nu}
+\end{align}
 
 \subsection{Closed solution for a 2 dimensional 2 x 2 lattice}
 
@@ -318,17 +328,16 @@ C_v &= \frac{1}{k_b T^2} \left( \frac{1}{Z} \sum_{i=1}^{M} E_i^2 e^{- \beta E_i 
 At last, we want to have a look at the magnetic susceptibility. This quantity is a magnetic property of the material. The magnetic susceptibility describes the response of the material to an applied magnetic field. 
 \begin{align}
 \chi &= \frac{1}{k_b T} \cdot \left( \frac{1}{Z} \sum_{i=1}^{M} M_i^2 e^{- \beta E_i } - \left( \frac{1}{Z} \sum_{i=1}^{M} M_i e^{- \beta E_i }  \right)^2 \right)\\
-&= \frac{1}{k_b T} \cdot \left( \frac{1}{Z} \cdot \left( 4^2 \cdot 1 \cdot e^{-8J\beta}+ 2^2 \cdot 4+(-2)^2 \cdot 4 + (-4)^2 \cdot 1 \cdot e^{-8J \beta } \right) - \left( 0  \right)^2 \right)\\
-&= \frac{1}{k_b T} \cdot \frac{32 e^{-8J\beta}+32}{ 12+ 4 \cdot \mathrm{cosh} \left( 8J \beta \right)}\\
-&= \frac{1}{k_b T} \cdot \frac{8 e^{-8J\beta}+8}{ 3+ \cdot \mathrm{cosh} \left( 8J \beta \right)}\\
+&= \frac{1}{k_b T} \cdot \left( \frac{1}{Z} \cdot \left( 4^2 \cdot 1 \cdot e^{8J\beta}+ 2^2 \cdot 4+(-2)^2 \cdot 4 + (-4)^2 \cdot 1 \cdot e^{8J \beta } \right) - \left( 0  \right)^2 \right)\\
+&= \frac{1}{k_b T} \cdot \frac{32 e^{8J\beta}+32}{ 12+ 4 \cdot \mathrm{cosh} \left( 8J \beta \right)}\\
+&= \frac{1}{k_b T} \cdot \frac{8 e^{8J\beta}+8}{ 3+ \cdot \mathrm{cosh} \left( 8J \beta \right)}\\
 \end{align}
 
 \begin{align}
 \chi_{abs} &= \frac{1}{k_b T} \cdot \left( \frac{1}{Z} \sum_{i=1}^{M} M_i^2 e^{- \beta E_i } - \left( \frac{1}{Z} \sum_{i=1}^{M} |M_i| e^{- \beta E_i }  \right)^2 \right)\\
-&= \frac{1}{k_b T} \cdot \left( \frac{1}{Z} \cdot \left( 4^2 \cdot 1 \cdot e^{-8J\beta}+ 2^2 \cdot 4+(-2)^2 \cdot 4 + (-4)^2 \cdot 1 \cdot e^{-8J \beta } \right) - \left( \frac{2 \cdot e^{8J\beta}+4}{3+ \mathrm{cosh}(8J\beta)} \right)^2 \right)\\
-&= \frac{1}{k_b T} \cdot \left( \frac{32 e^{-8J\beta}+32}{ 12+ 4 \cdot \mathrm{cosh} \left( 8J \beta \right)}- \left( \frac{2 \cdot e^{8J\beta}+4}{3+ \mathrm{cosh}(8J\beta)} \right)^2 \right)\\
-&= \frac{1}{k_b T} \cdot \left(\frac{8 e^{-8J\beta}+8}{ 3+ \cdot \mathrm{cosh} \left( 8J \beta \right)}- \left( \frac{2 \cdot e^{8J\beta}+4}{3+ \mathrm{cosh}(8J\beta)} \right)^2 \right)\\
-&=\frac{1}{k_b T} \cdot  \frac{4 (3+4 \mathrm{cosh}(8 J \beta)-10 \mathrm{sinh}(8 J \beta)-2 \mathrm{sinh}(16 J \beta))}{(3+\mathrm{cosh}(8 J \beta))^2}
+&= \frac{1}{k_b T} \cdot \left( \frac{1}{Z} \cdot \left( 4^2 \cdot 1 \cdot e^{8J\beta}+ 2^2 \cdot 4+(-2)^2 \cdot 4 + (-4)^2 \cdot 1 \cdot e^{8J \beta } \right) - \left( \frac{2 \cdot e^{8J\beta}+4}{3+ \mathrm{cosh}(8J\beta)} \right)^2 \right)\\
+&= \frac{1}{k_b T} \cdot \left( \frac{32 e^{8J\beta}+32}{ 12+ 4 \cdot \mathrm{cosh} \left( 8J \beta \right)}- \left( \frac{2 \cdot e^{8J\beta}+4}{3+ \mathrm{cosh}(8J\beta)} \right)^2 \right)\\
+&= \frac{1}{k_b T} \cdot \left(\frac{8 e^{8J\beta}+8}{ 3+ \cdot \mathrm{cosh} \left( 8J \beta \right)}- \left( \frac{2 \cdot e^{8J\beta}+4}{3+ \mathrm{cosh}(8J\beta)} \right)^2 \right)\\
 \end{align}
 
 \section{Execution}
