@@ -1,0 +1,9 @@
+#set title ''
+set xlabel 'T'
+set ylabel '<E>'
+#set xrange [0:2]
+#set yrange [-6500:1000]
+set grid
+set key right bottom
+#set loadpath 'C:\Users\Vincent\Desktop\P4 daten'
+plot 'l20.txt' using 3:4 title 'L = 20', 'l40.txt' using 3:4 title 'L = 40', 'l60.txt' using 3:4 title 'L = 60', 'l80.txt' using 3:4 title 'L = 80'

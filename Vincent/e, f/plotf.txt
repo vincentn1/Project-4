@@ -1,0 +1,4 @@
+set xrange [:0.055]
+set yrange [2.26:2.35]
+
+plot 'f.txt' using 1:2:4 with yerrorbars  
