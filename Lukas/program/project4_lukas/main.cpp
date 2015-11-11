@@ -50,18 +50,20 @@ void readinfromscrean(int &latticesize, double &Tempstart, double &Tempstep, dou
 void metropolis(int latticesize, long &idum , int **Spinarray,double &E, double &M, double *w ){
     for(int i=0;i<latticesize;i++){
         for(int j=0;j<latticesize;j++){
+            cout << "hallo   ";
             //we now flip one spin at a time, therefore, we have to have random numbers
             int ix= (int) (ran3(&idum)*(double)latticesize);
             int iy= (int) (ran3(&idum)*(double)latticesize);
-            int DeltaE;
-            DeltaE=2*Spinarray[ix][iy]*(Spinarray[(ix+1)%latticesize][iy]+Spinarray[(ix-1)%latticesize][iy]+Spinarray[ix][(iy+1)%latticesize]+Spinarray[ix][(iy-1)%latticesize]);
+            double  DeltaE;
+            DeltaE=(double) 2*Spinarray[ix][iy]*(Spinarray[(ix+1)%latticesize][iy]+Spinarray[(ix-1)%latticesize][iy]+Spinarray[ix][(iy+1)%latticesize]+Spinarray[ix][(iy-1)%latticesize]);
             //Do we want to accept this move??
-            if(ran3(&idum)<=w[DeltaE+8]){
+            if(ran3(&idum)<=w[(int) (DeltaE+8)]){
                 Spinarray[ix][iy]*=-1;
                 //calculate new Energy and Magnetisation
                 M+=(double) 2*Spinarray[ix][iy];
                 E+=(double) DeltaE;
             }
+ cout<< "test  "<<endl;
         }
     }
 }
@@ -105,17 +107,20 @@ int main(){
             averagevalues[i]=0.0;
         }
         initialize(latticesize,grid,Magnetisation,Energy,temp);
-        //now performing Monte Crlo method
-        metropolis(latticesize,idum,grid,E,M,w);
+
+
         //compute averages:
         for(int cycles=1;cycles<maxcycle;cycles++){
+            //now performing Monte Crlo method
+            metropolis(latticesize,idum,grid,E,M,w);
             averagevalues[0]+=E;
             averagevalues[1]+=E*E;
             averagevalues[2]+=M;
             averagevalues[3]+=M*M;
             averagevalues[4]+=fabs(M);
         }
-    outputfunction(latticesize, maxcycle, temp, averagevalues);
+
+        outputfunction(latticesize, maxcycle, temp, averagevalues);
     }
 }
 
