@@ -214,24 +214,25 @@ the limiting form of the function
 \lim_{\alpha \to 0} \frac{1}{\alpha}(Y^{-\alpha}-1)=-lnY
 \end{align}
 can be used to infer that closed-form result in low singularity with $\alpha = 0.$
-Onsager's result can be written as:
+Onsager's result can be written for $T<T_c$ as \ref{Onsager less Tc}. For $T>T_c$, the magnetisation is zero.
 
 \begin{align}
-<\frac{M(T)}{N}> = \Bigg[ 1- \frac{(1 - tanh ^2(\beta J))^{4}}{16tanh^{4}(\beta J)} \Bigg] ^{\frac{1}{8}} 
+<\frac{M(T)}{N}> = \Bigg[ 1- \frac{(1 - tanh ^2(\beta J))^{4}}{16tanh^{4}(\beta J)} \Bigg] ^{\frac{1}{8}}  \label{Onsager less Tc}
 \end{align}
 for $T<T_c.$ otherwise the magnetization is zero 
 "lecture notes Computational physics 2015 at University of Oslo by Morten Hjorth-Jensen page 435)"\\
  
  
-From Onsager's result we get <M(t)/N> and $T_c$ is the temperature where we start getting magnetization, from the order transition and $T_c$ can be found when <M> = 0.
+From Onsager's result, we get <M(t)/N>. $T_c$ is the temperature, where we start getting a non zero magnetization. When we heat up the system, we start with non-zero magnetisation until we pas the critical Temperature. From there on, we have zero magnetisation.
+If we want now to calculate the critical Temperature,  
    
 \begin{align}
-<M(T)/N> = \Bigg[ 1- \frac{(1 - tanh ^2(\beta J))^{4}}{16tanh^{4}(\beta J)} \Bigg] ^{\frac{1}{8}} = 0
+<M(T)/N> = \Bigg[ 1- \frac{(1 - \mathrm{tanh} ^2(\beta J))^{4}}{16\mathrm{tanh}^{4}(\beta J)} \Bigg] ^{\frac{1}{8}} = 0
 \end{align}
 
-the only way to obtain 0 <M> is when 
+the only way to obtain <M>=0 is when 
 \begin{align}
-\frac{(1 - tanh ^2(\beta J))^{4}}{16tanh^{4}(\beta J)} = 1
+\frac{(1 - \mathrm{tanh} ^2(\beta J))^{4}}{16\mathrm{tanh}^{4}(\beta J)} = 1
 \end{align}
 which give us 
 \begin{align}

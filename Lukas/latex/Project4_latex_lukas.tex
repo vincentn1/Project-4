@@ -180,26 +180,26 @@ It is difficult to compute since we need the sum over all states. If we have a 1
 \subsubsection{Critical temperature (Lars Onsager)}
 in 1944 the Norwegian chemist Lars Onsager made very important discovery in theoretical physics, namely the exact solution of the Ising spin model in two dimensions. His work is up to now a valid theoretical description of the two dimensional Ising model. Onsager's solutions achieved the thermodynamic properties of interaction systems and phase transitions at $T_c$. However in 1942 Lars Onsager solved the two dimensional model for zero field energy, which has been published two years after. In 1948, he wrote the solution for the zero field magnetization in a conference at Cornell. Onsager showed how to derive the partition function for the canonical ensemble with zero external magnetic field Z(B = 0,T)with N spins.
 \begin{align}
- Z_N =  \left( 2 cosh(\beta J)e^{I} \right)^N 
+ Z_N =  \left( 2 \mathrm{cosh}(\beta J)e^{I} \right)^N 
 \end{align}
-where $ I = \frac{1}{2\pi} \int_{0}^{\pi} d \phi ln \bigg[ \frac{1}{2} \left( 1 + \sqrt{1-\kappa^2 sin ^2 \phi} \right) \bigg]$
-where $\kappa = \frac {2sinh(2\beta J)}{cosh^2(2\beta J)}$
+where $ I = \frac{1}{2\pi} \int_{0}^{\pi} d \phi ln \bigg[ \frac{1}{2} \left( 1 + \sqrt{1-\kappa^2 \mathrm{sin} ^2 \phi} \right) \bigg]$
+where $\kappa = \frac {2\mathrm{sinh}(2\beta J)}{\mathrm{cosh}^2(2\beta J)}$
 and the energy is given by
 \begin{align}
- <E> = -Jcoth(2\beta J) \bigg[ 1+\frac{2}{\pi}(2tanh^2(2\beta J)-1)K_1(q) \bigg] 
+ <E> = -J\mathrm{coth}(2\beta J) \bigg[ 1+\frac{2}{\pi}(2\mathrm{tanh}^2(2\beta J)-1)K_1(q) \bigg] 
 \end{align}
-where $q = sinh(2\beta J)/cosh^2(2\beta J)$ and the complete elliptic integral of the first kind is:
+where $q = \mathrm{sinh}(2\beta J)/\mathrm{cosh}^2(2\beta J)$ and the complete elliptic integral of the first kind is:
 \begin{align}
-k_1(q) = \int_{0}^{\frac{\pi}{2}} \frac{d\phi}{\sqrt{1-q^2sin^2 \phi}} 
+k_1(q) = \int_{0}^{\frac{\pi}{2}} \frac{d\phi}{\sqrt{1-q^2\mathrm{sin}^2 \phi}} 
 \end{align}
 and differentiating the energy with the respect to temperature we obtain the specific heat:
 
 \begin{align}
-C_v = \frac{\partial <E>}{\partial T} = \frac{4K_B}{\pi}(\beta J coth(2\beta J) )^2 \bigg\{ K_1(q)-K_2(q)-(1-tanh^2(2\beta J))\bigg[ \frac{\pi}{2}+(2tanh^2(2\beta J)-1 )K_1(q) \bigg] \bigg\}
+C_v = \frac{\partial <E>}{\partial T} = \frac{4K_B}{\pi}(\beta J \mathrm{coth}(2\beta J) )^2 \bigg\{ K_1(q)-K_2(q)-(1-\mathrm{tanh}^2(2\beta J))\bigg[ \frac{\pi}{2}+(2\mathrm{tanh}^2(2\beta J)-1 )K_1(q) \bigg] \bigg\}
 \end{align}
 where 
 \begin{align}
-k_2(q) = \int_{0}^{\frac{\pi}{2}} d \phi \sqrt{1-q^2sin^2\phi}
+k_2(q) = \int_{0}^{\frac{\pi}{2}} d \phi \sqrt{1-q^2\mathrm{sin}^2\phi}
 \end{align}
 Near the critical temperature $T_c$ the specific heat behaves as:
 \begin{align}
@@ -211,16 +211,37 @@ C_v \sim \Bigg[ 1- \frac{T}{T_c}\Bigg]^{\alpha}
 \end{align}
 the limiting form of the function
 \begin{align}
-\lim_{\alpha \to 0} \frac{1}{\alpha}(Y^{-\alpha}-1)=-lnY
+\lim_{\alpha \to 0} \frac{1}{\alpha}(\mathrm{Y}^{-\alpha}-1)=-ln\mathrm{Y}
 \end{align}
 can be used to infer that closed-form result in low singularity with $\alpha = 0.$
-Onsager's result can be written as:
+We do not want t make a complete derivation of Onsager's result, however we want to limit ourselves to his final result for the expectation value of the magnetisation:
 
 \begin{align}
-<\frac{M(T)}{N}> = \Bigg[ 1- \frac{(1 - tanh ^2(\beta J))^{4}}{16tanh^{4}(\beta J)} \Bigg] ^{\frac{1}{8}} 
+<\frac{M(T)}{N}> = \Bigg[ 1- \frac{(1 - \mathrm{tanh} ^2(\beta J))^{4}}{16\mathrm{tanh}^{4}(\beta J)} \Bigg] ^{\frac{1}{8}} \label{Onsager magnetisation}
 \end{align}
 for $T<T_c.$ otherwise the magnetization is zero 
 "lecture notes Computational physics 2015 at University of Oslo by Morten Hjorth-Jensen page 435)" 
+
+
+From Onsager's result, we get <M(t)/N>. $T_c$ is the temperature, where we start getting a non zero magnetization. When we heat up the system, we start with non-zero magnetisation until we pas the critical Temperature. From there on, we have zero magnetisation.
+If we want now to calculate the critical Temperature, we can set the equation \ref{Onsager magnetisation} to zero. The temperature belonging to this is the critical temperature:
+   
+\begin{align}
+<M(T)/N> = \Bigg[ 1- \frac{(1 - \mathrm{tanh} ^2(\beta J))^{4}}{16\mathrm{tanh}^{4}(\beta J)} \Bigg] ^{\frac{1}{8}} = 0
+\end{align}
+
+the only way to obtain <M>=0 is when equation \ref{critical temperature derivation} is valid. 
+\begin{align}
+\frac{(1 - \mathrm{tanh}^2(\beta J))^{4}}{16\mathrm{tanh}^{4}(\beta J)} = 1 \label{critical temperature derivation}
+\end{align}
+This gives us:
+\begin{align}
+0&=\mathrm{tanh}(\beta J )^2+2 \cdot \mathrm{tanh}(\beta J ) -1 \\
+\mathrm{tanh}(J \beta ) &= \frac{-2 \pm \sqrt{4+4}}{2} = -1 \pm \sqrt{2}\\
+\beta J &= \mathrm{arctanh}(-1 \pm \sqrt{2})\\
+&= - \frac{1}{2} ln(1+\sqrt{2})\\
+\Rightarrow \frac {k_B T_c}{J} &= \frac{2}{ln(1+\sqrt{2})}\approx 2.2692
+\end{align}
 
 
 \subsection{Closed solution for a 2 dimensional 2 x 2 lattice}
