@@ -1,0 +1,10 @@
+set title ''
+set xlabel ''
+set ylabel ''
+#set xrange [0:2]
+#set yrange [-0.15:0.26]
+set grid
+set loadpath 'C:\Users\Vincent\Desktop\P4 daten'
+#set key font ",25"
+plot 'l20.txt' title 'L = 20'#, 'l40.txt' title 'L = 40', 'l60.txt' title 'L = 60' 
+#{/Symbol r}_r
