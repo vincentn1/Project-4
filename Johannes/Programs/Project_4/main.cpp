@@ -27,12 +27,17 @@ int main()
      * Initializing everything
      */
     //declare variables
+    //size of grid, number of cycles, how many moves were accepted?
     int size, mccycles, acceptedmoves;
+    //seed for ran3
     long idum;
+    //temperatures, energy and magnetization
     double tempStart, tempMax, tempStep, M, E;
+    //array with probabilities for energy changes and expectation values of E and M and...
     double energyChanges[5], averages[5];
+    //start randomly or ordered?
     bool isRandomSetup;
-    //Time for different seed every time
+    //Time for different seed every time and for time calculation
     time_t start, finish, seed;
     seed = time(NULL);
     idum = -((long)seed);
@@ -75,11 +80,15 @@ int main()
             averages[4]+=abs((int)M);
             //Only for c), otherwise comment next line out (very slow!)
             //output(size, i+1, temp, averages);
+
             //only for c) (second part); comment out if not used!
             //ofile << i << "\t" << acceptedmoves << endl;
+
+            //This is for part d, can be commented out else
+            //ofile << E << endl;
         }
         //output of data for this temperature (comment out if not used!)
-        output(size, mccycles, temp, averages);
+        //output(size, mccycles, temp, averages);
     }
 
     /*
@@ -156,7 +165,7 @@ void monteCarlo(int** spinArray, int size, long& idum, double* energyDeltas, dou
             //update energy and magnetization
             M+=2*spinArray[x][y];
             E+=deltaE;
-            //count accepted move! (needed for one part)
+            //count accepted move! (needed for part c)
             accept++;
         }
     }
@@ -185,14 +194,14 @@ void output(int size, int cycles, double temp, double* averages){
     //Energy of the system
     double energy = averages[0]/cycles;
     ofile << "\t\t" << energy;
-    //heat capacity <E^2>-<E>^2
-    double heatcap = (averages[1]/cycles)-(energy*energy);
+    //heat capacity 1/t^2*(<E^2>-<E>^2)
+    double heatcap = ((averages[1]/cycles)-(energy*energy))/(temp*temp);
     ofile << "\t" << heatcap;
     //absolute value of Magnetization
     double abs_magnetization = averages[4]/cycles;
     ofile << "\t" << abs_magnetization;
-    //susceptibility <M^2>-<M>^2
-    double suscept = (averages[4]/cycles)-((averages[2]/cycles)*(averages[2]/cycles));
+    //susceptibility 1/t*(<M^2>-<M>^2)
+    double suscept = ((averages[3]/cycles)-(abs_magnetization*abs_magnetization))/(temp);
     ofile << "\t" << suscept << endl;
     return;
 }

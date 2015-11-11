@@ -1,16 +1,23 @@
 set terminal png
 set output "Energy.png"
+set autoscale
+set xlabel "T"
 E(x)=-(8*sinh(8/x))/(3+cosh(8/x))
 set ylabel "<E>"
 plot E(x) title "Analytical value", "output.txt" using 3:4 title "Numerical calculation"
 set terminal png
 set output "Magnetization.png"
-M(x)=(2*exp(-8/x)+2)/(3+cosh(8/x))
+M(x)=(2*exp(8/x)+4)/(3+cosh(8/x))
 set ylabel "<M>"
 plot M(x) title "Analytical value", "output.txt" using 3:6 title "Numerical calculation"
 set output "Heat_capacity.png"
 cv(x)=(64/(x*x))*((1+3*cosh(8/x))/((3+cosh(8/x))*(3+cosh(8/x))))
 set ylabel "<C_v>"
 plot cv(x) title "Analytical value", "output.txt" using 3:5 title "Numerical calculation"
+set output "Susceptibility.png"
+#chi(x)=(1/(x))*((4*(3+4*cosh(8/x)-10*sinh(8/x)-2*sinh(16/x)))/((3+cosh(8/x))*(3+cosh(8/x))))
+chi(x)=(1/x)*(8*exp(-8/x)+8)/(3+cosh(8/x))
+set ylabel "<{/Symbol C}>"
+plot chi(x) title "Analytical value", "output.txt" using 3:7 title "Numerical calculation"
 set terminal wxt
 replot

@@ -1,0 +1,43 @@
+set terminal png
+set output "a1o.png"
+set xlabel "MC cycles"
+set ylabel "<E>"
+set y2label "<|M|>"
+set y2tics
+plot "T_1_o.txt" using 2:4 title "<E>", "T_1_o.txt" using 2:6 title "<|M|>" axes x1y2
+
+set terminal png
+set output "a1r.png"
+set xlabel "MC cycles"
+set ylabel "<E>"
+set y2label "<|M|>"
+set y2tics
+plot "T_1_r.txt" using 2:4 title "<E>", "T_1_r.txt" using 2:6 title "<|M|>" axes x1y2
+
+set terminal png
+set output "a24o.png"
+set xlabel "MC cycles"
+set ylabel "<E>"
+set y2label "<|M|>"
+set y2tics
+plot "T_2_4_o.txt" using 2:4 title "<E>", "T_2_4_o.txt" using 2:6 title "<|M|>" axes x1y2
+
+set terminal png
+set output "a24r.png"
+set xlabel "MC cycles"
+set ylabel "<E>"
+set y2label "<|M|>"
+set y2tics
+plot "T_2_4_r.txt" using 2:4 title "<E>", "T_2_4_r.txt" using 2:6 title "<|M|>" axes x1y2
+
+reset
+set terminal png
+set output "b1.png"
+set xlabel "MC cycles"
+set ylabel "accepted moves"
+plot "T_1_o_Part2.txt" using 1:2 title "T=1.0"
+set output "b24.png"
+plot "T_2_4_o_Part2.txt" using 1:2 title "T=2.4"
+
+set terminal wxt
+replot
