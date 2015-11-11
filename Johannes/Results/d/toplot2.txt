@@ -1,0 +1,13 @@
+reset
+set ylabel "N"
+set xlabel "E"
+
+binwidth = 1
+binstart = -800.5
+# set width of single bins in histogram
+set boxwidth 0.9*binwidth
+# set fill style of bins
+set style fill solid 0.5
+# define macro for plotting the histogram
+hist = 'u (binwidth*(floor(($1-binstart)/binwidth)+0.5)+binstart):(1.0) smooth freq w boxes'
+plot 'T24.txt' i 0 @hist ls 1 title "Number of times energy appeared"
