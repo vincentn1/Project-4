@@ -33,7 +33,7 @@
 
 %	e part:
 
-In figure \ref{e_all}, \ref{absm_all} and \ref{cv_all}, the expectation values $<E>$ and $<|M|>$, the specific heat $C_V$ and the susceptibility $\chi$ for lattice sizes $L = 20, 40, 60, 80$ can be seen as functions of $T$ close to the critical temperature. It is the easiest to estimate the critical temperature by looking at figure \ref{cv_all}, because it is at the temperature where $C_V$ is the highest. In figure \ref{cv2040} and \ref{cv6080} we increased the number of Monte Carlo cycles and decreased the temperature step length and interval to determine the temperature for the maximum of $C_V$ more precisely. In table \ref{tc} the measured critical temperatures can be seen. While it is possible to measure $T_C$ even more precisely by increasing the Monte Carlo cycles and decreasing the Temperature step length, it is not possible aim at any precision, due to the quickly increasing calculation time.
+In figure \ref{e_all}, \ref{absm_all}, \ref{chi_all} and \ref{cv_all}, the expectation values $<E>$ and $<|M|>$, the specific heat $C_V$ and the susceptibility $\chi$ for lattice sizes $L = 20, 40, 60, 80$ can be seen as functions of $T$ close to the critical temperature. It is the easiest to estimate the critical temperature by looking at figure \ref{cv_all}, because it is at the temperature where $C_V$ is the highest. In figure \ref{cv2040} and \ref{cv6080} we increased the number of Monte Carlo cycles and decreased the temperature step length and interval to determine the temperature of the maximum of $C_V$ more precisely. In table \ref{tc} the measured critical temperatures can be seen. While it is possible to measure $T_C$ even more precisely by increasing the Monte Carlo cycles and decreasing the Temperature step length, it is not possible aim at any precision, due to the quickly increasing calculation time.
 
 
 \begin{figure}[h]
@@ -46,8 +46,15 @@ In figure \ref{e_all}, \ref{absm_all} and \ref{cv_all}, the expectation values $
 \begin{figure}[h]
 	\includegraphics[scale = 0.25]{absm_all.png}
 	\centering
-	\caption{Expectation value of the absolute magnetisation against temperature for different lattice sizes ($10^6$ Monte Carlo cyclees)}
+	\caption{Expectation value of the absolute magnetisation against temperature for different lattice sizes ($10^6$ Monte Carlo cycles)}
 	\label{absm_all}
+\end{figure}
+
+\begin{figure}[h]
+	\includegraphics[scale = 0.25]{sus_all.png}
+	\centering
+	\caption{Susceptibility against temperature for different lattice sizes ($10^6$ Monte Carlo cycles)}
+	\label{chi_all}
 \end{figure}
 
 \begin{figure}[h]
@@ -88,7 +95,7 @@ In figure \ref{e_all}, \ref{absm_all} and \ref{cv_all}, the expectation values $
 	\includegraphics[scale = 0.25]{tc2.png}
 	\centering
 	\caption{Critical temperature $T_C$ against $\frac{1}{L}$}
-	\label{tc}
+	\label{tc2}
 \end{figure}
 
 
