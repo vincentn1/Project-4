@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.15 (MiKTeX 2.9 64-bit) (preloaded format=pdflatex 2015.9.1)  11 NOV 2015 21:29
+This is pdfTeX, Version 3.14159265-2.6-1.40.15 (MiKTeX 2.9 64-bit) (preloaded format=pdflatex 2015.9.1)  12 NOV 2015 16:53
 entering extended mode
 **P4vincent.tex
 (P4vincent.tex
@@ -1072,8 +1072,9 @@ Package pdftex.def Info: tc2.png used on input line 98.
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
+[3 <./E_all.png>]
 Package atveryend Info: Empty hook `BeforeClearDocument' on input line 123.
-[3 <./E_all.png>] [4 <./absm_all.png>] [5 <./sus_all.png> <./cv_all.png>]
+ [4 <./absm_all.png>] [5 <./sus_all.png> <./cv_all.png>]
 [6 <./cv2040.png> <./cv6080.png>] [7 <./tc2.png>]
 Package atveryend Info: Empty hook `AfterLastShipout' on input line 123.
  (P4vincent.aux)
@@ -1086,7 +1087,7 @@ Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 123.
 Here is how much of TeX's memory you used:
  9315 strings out of 493698
  130191 string characters out of 3144407
- 249527 words of memory out of 3000000
+ 250527 words of memory out of 3000000
  12442 multiletter control sequences out of 15000+200000
  73416 words of font info for 94 fonts, out of 3000000 for 9000
  1025 hyphenation exceptions out of 8191
@@ -1097,7 +1098,7 @@ eX 2.9/fonts/type1/public/fourier/fourier-ms.pfb><C:/Program Files/MiKTeX 2.9/f
 onts/type1/adobe/utopia/putb8a.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/ado
 be/utopia/putr8a.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/adobe/utopia/putr
 i8a.pfb>
-Output written on P4vincent.pdf (7 pages, 374822 bytes).
+Output written on P4vincent.pdf (7 pages, 374884 bytes).
 PDF statistics:
  98 PDF objects out of 1000 (max. 8388607)
  20 named destinations out of 1000 (max. 500000)
