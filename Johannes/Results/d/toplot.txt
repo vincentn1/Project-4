@@ -1,4 +1,39 @@
-binwidth=1.0
-bin(x,width)=width*floor(x/width)
+reset
+set ylabel "N"
+set xlabel "E"
+bm = 0.15
+lm = 0.12
+rm = 0.95
+gap = 0.03
+size = 0.75
+kk = 0.5
+binwidth = 1
+binstart = -800.5
+# set width of single bins in histogram
+set boxwidth 0.9*binwidth
+# set fill style of bins
+set style fill solid 0.5
+# define macro for plotting the histogram
+hist = 'u (binwidth*(floor(($1-binstart)/binwidth)+0.5)+binstart):(1.0) smooth freq w boxes'
+set multiplot
+set border 1+2+8
+set xtics nomirror
+set ytics nomirror
+set lmargin at screen lm
+set rmargin at screen rm
+set bmargin at screen bm
+set tmargin at screen bm + size * kk
+set xrange [-800:0]
+set yrange [0:200]
+plot 'T24.txt' i 0 @hist ls 1 notitle
 
-plot 'output.txt' using (bin($1,binwidth)):(1.0) smooth freq with boxes
+unset xtics
+unset xlabel
+set border 2+4+8
+set bmargin at screen bm + size * kk + gap
+set tmargin at screen bm + size + gap
+set xrange [-800:0]
+set yrange [400:600]
+unset ylabel
+
+plot 'T24.txt' i 0 @hist ls 1 title "Number of times energy appeared"

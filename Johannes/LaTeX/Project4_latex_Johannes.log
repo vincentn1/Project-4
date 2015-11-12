@@ -1,7 +1,7 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.15 (MiKTeX 2.9 64-bit) (preloaded format=pdflatex 2015.9.1)  11 NOV 2015 21:29
+This is pdfTeX, Version 3.14159265-2.6-1.40.15 (MiKTeX 2.9 64-bit) (preloaded format=pdflatex 2015.8.30)  12 NOV 2015 09:18
 entering extended mode
-**P4vincent.tex
-(P4vincent.tex
+**Project4_latex_Johannes.tex
+(Project4_latex_Johannes.tex
 LaTeX2e <2014/05/01>
 Babel <3.9l> and hyphenation patterns for 68 languages loaded.
 ("C:\Program Files\MiKTeX 2.9\tex\latex\base\article.cls"
@@ -844,7 +844,8 @@ File: lstlang1.sty 2014/09/06 1.5e listings language file
 )
 ("C:\Program Files\MiKTeX 2.9\tex\latex\listings\lstmisc.sty"
 File: lstmisc.sty 2014/09/06 1.5e (Carsten Heinz)
-) (P4vincent.aux)
+)
+(Project4_latex_Johannes.aux)
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 24.
 LaTeX Font Info:    ... okay on input line 24.
 LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 24.
@@ -924,7 +925,7 @@ LaTeX Info: Redefining \ref on input line 24.
 LaTeX Info: Redefining \pageref on input line 24.
 LaTeX Info: Redefining \nameref on input line 24.
 
-(P4vincent.out) (P4vincent.out)
+(Project4_latex_Johannes.out) (Project4_latex_Johannes.out)
 \@outlinefile=\write3
 
 *geometry* driver: auto-detecting
@@ -993,113 +994,179 @@ LaTeX Font Info:    Font shape `U/futm/m/n' will be
 {C:/ProgramData/MiKTeX/2.9/pdftex/config/pdftex.map}]
 LaTeX Font Info:    Font shape `T1/futs/bx/n' in size <14.4> not available
 (Font)              Font shape `T1/futs/b/n' tried instead on input line 28.
- (P4vincent.toc
+ (Project4_latex_Johannes.toc
 LaTeX Font Info:    Font shape `T1/futs/bx/n' in size <10> not available
 (Font)              Font shape `T1/futs/b/n' tried instead on input line 2.
+LaTeX Font Info:    Font shape `FMX/futm/m/n' will be
+(Font)              scaled to size 9.19998pt on input line 4.
+LaTeX Font Info:    Font shape `FMX/futm/m/n' will be
+(Font)              scaled to size 6.99199pt on input line 4.
+LaTeX Font Info:    Font shape `FMX/futm/m/n' will be
+(Font)              scaled to size 5.51999pt on input line 4.
+LaTeX Font Info:    Font shape `U/futm/m/n' will be
+(Font)              scaled to size 9.19998pt on input line 4.
+LaTeX Font Info:    Font shape `U/futm/m/n' will be
+(Font)              scaled to size 6.99199pt on input line 4.
+LaTeX Font Info:    Font shape `U/futm/m/n' will be
+(Font)              scaled to size 5.51999pt on input line 4.
 )
 \tf@toc=\write4
  [2]
-LaTeX Font Info:    Font shape `FMX/futm/m/n' will be
-(Font)              scaled to size 9.19998pt on input line 36.
-LaTeX Font Info:    Font shape `FMX/futm/m/n' will be
-(Font)              scaled to size 6.99199pt on input line 36.
-LaTeX Font Info:    Font shape `FMX/futm/m/n' will be
-(Font)              scaled to size 5.51999pt on input line 36.
-LaTeX Font Info:    Font shape `U/futm/m/n' will be
-(Font)              scaled to size 9.19998pt on input line 36.
-LaTeX Font Info:    Font shape `U/futm/m/n' will be
-(Font)              scaled to size 6.99199pt on input line 36.
-LaTeX Font Info:    Font shape `U/futm/m/n' will be
-(Font)              scaled to size 5.51999pt on input line 36.
-
-<E_all.png, id=32, 1927.2pt x 964.60374pt>
-File: E_all.png Graphic file (type png)
- <use E_all.png>
-Package pdftex.def Info: E_all.png used on input line 43.
-(pdftex.def)             Requested size: 481.79883pt x 241.15034pt.
-
-<absm_all.png, id=33, 1927.2pt x 964.60374pt>
-File: absm_all.png Graphic file (type png)
- <use absm_all.png>
-Package pdftex.def Info: absm_all.png used on input line 50.
-(pdftex.def)             Requested size: 481.79883pt x 241.15034pt.
+LaTeX Font Info:    Font shape `T1/futs/bx/n' in size <12> not available
+(Font)              Font shape `T1/futs/b/n' tried instead on input line 36.
+LaTeX Font Info:    Try loading font information for TS1+futs on input line 54.
 
 
-LaTeX Warning: `h' float specifier changed to `ht'.
+("C:\Program Files\MiKTeX 2.9\tex\latex\fourier\ts1futs.fd"
+File: ts1futs.fd 2004/03/26 Fontinst v1.926 font definitions for TS1/futs.
+) [3]
 
-<sus_all.png, id=34, 1927.2pt x 964.60374pt>
-File: sus_all.png Graphic file (type png)
- <use sus_all.png>
-Package pdftex.def Info: sus_all.png used on input line 57.
-(pdftex.def)             Requested size: 481.79883pt x 241.15034pt.
+LaTeX Warning: Reference `closed_solution' on page 4 undefined on input line 11
+5.
 
+<Energy.png, id=89, 481.8pt x 361.35pt>
+File: Energy.png Graphic file (type png)
+ <use Energy.png>
+Package pdftex.def Info: Energy.png used on input line 130.
+(pdftex.def)             Requested size: 483.69687pt x 362.78268pt.
 
-LaTeX Warning: `h' float specifier changed to `ht'.
+<Magnetization.png, id=90, 481.8pt x 361.35pt>
+File: Magnetization.png Graphic file (type png)
+ <use Magnetization.png>
+Package pdftex.def Info: Magnetization.png used on input line 134.
+(pdftex.def)             Requested size: 483.69687pt x 362.78268pt.
 
-<cv_all.png, id=35, 1927.2pt x 964.60374pt>
-File: cv_all.png Graphic file (type png)
- <use cv_all.png>
-Package pdftex.def Info: cv_all.png used on input line 64.
-(pdftex.def)             Requested size: 481.79883pt x 241.15034pt.
+<Heat_capacity.png, id=91, 481.8pt x 361.35pt>
+File: Heat_capacity.png Graphic file (type png)
+ <use Heat_capacity.png>
+Package pdftex.def Info: Heat_capacity.png used on input line 138.
+(pdftex.def)             Requested size: 483.69687pt x 362.78268pt.
+
+<Susceptibility.png, id=92, 481.8pt x 361.35pt>
+File: Susceptibility.png Graphic file (type png)
+ <use Susceptibility.png>
+Package pdftex.def Info: Susceptibility.png used on input line 142.
+(pdftex.def)             Requested size: 483.69687pt x 362.78268pt.
 
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-<cv2040.png, id=36, 1927.2pt x 964.60374pt>
-File: cv2040.png Graphic file (type png)
- <use cv2040.png>
-Package pdftex.def Info: cv2040.png used on input line 71.
-(pdftex.def)             Requested size: 481.79883pt x 241.15034pt.
+
+LaTeX Warning: `h' float specifier changed to `ht'.
 
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-<cv6080.png, id=37, 1927.2pt x 964.60374pt>
-File: cv6080.png Graphic file (type png)
- <use cv6080.png>
-Package pdftex.def Info: cv6080.png used on input line 78.
-(pdftex.def)             Requested size: 481.79883pt x 241.15034pt.
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+[4] <a1o.png, id=128, 481.8pt x 361.35pt>
+File: a1o.png Graphic file (type png)
+ <use a1o.png>
+Package pdftex.def Info: a1o.png used on input line 154.
+(pdftex.def)             Requested size: 483.69687pt x 362.78268pt.
+
+<a1r.png, id=129, 481.8pt x 361.35pt>
+File: a1r.png Graphic file (type png)
+ <use a1r.png>
+Package pdftex.def Info: a1r.png used on input line 158.
+(pdftex.def)             Requested size: 483.69687pt x 362.78268pt.
+
+<a24o.png, id=130, 481.8pt x 361.35pt>
+File: a24o.png Graphic file (type png)
+ <use a24o.png>
+Package pdftex.def Info: a24o.png used on input line 162.
+(pdftex.def)             Requested size: 483.69687pt x 362.78268pt.
+
+<a24r.png, id=131, 481.8pt x 361.35pt>
+File: a24r.png Graphic file (type png)
+ <use a24r.png>
+Package pdftex.def Info: a24r.png used on input line 166.
+(pdftex.def)             Requested size: 483.69687pt x 362.78268pt.
 
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-<tc2.png, id=38, 1445.4pt x 723.45282pt>
-File: tc2.png Graphic file (type png)
- <use tc2.png>
-Package pdftex.def Info: tc2.png used on input line 98.
-(pdftex.def)             Requested size: 361.34912pt x 180.86276pt.
+
+LaTeX Warning: `h' float specifier changed to `ht'.
 
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 123.
-[3 <./E_all.png>] [4 <./absm_all.png>] [5 <./sus_all.png> <./cv_all.png>]
-[6 <./cv2040.png> <./cv6080.png>] [7 <./tc2.png>]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 123.
- (P4vincent.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 123.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 123.
-Package rerunfilecheck Info: File `P4vincent.out' has not changed.
-(rerunfilecheck)             Checksum: 2F71C8F71A3A7CB4C1E2CD8633D4DB1F;43.
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 123.
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+<b1.png, id=132, 481.8pt x 361.35pt>
+File: b1.png Graphic file (type png)
+ <use b1.png>
+Package pdftex.def Info: b1.png used on input line 171.
+(pdftex.def)             Requested size: 483.69687pt x 362.78268pt.
+
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+<b24.png, id=133, 481.8pt x 361.35pt>
+File: b24.png Graphic file (type png)
+ <use b24.png>
+Package pdftex.def Info: b24.png used on input line 175.
+(pdftex.def)             Requested size: 483.69687pt x 362.78268pt.
+
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+<d1.png, id=136, 642.4pt x 385.44pt>
+File: d1.png Graphic file (type png)
+ <use d1.png>
+Package pdftex.def Info: d1.png used on input line 182.
+(pdftex.def)             Requested size: 483.69687pt x 290.22615pt.
+
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+<d24.png, id=137, 642.4pt x 385.44pt>
+File: d24.png Graphic file (type png)
+ <use d24.png>
+Package pdftex.def Info: d24.png used on input line 186.
+(pdftex.def)             Requested size: 483.69687pt x 290.22615pt.
+
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 193.
+[5 <./Energy.png>] [6 <./Magnetization.png>] [7 <./Heat_capacity.png>] [8 <./Su
+sceptibility.png>] [9 <./a1o.png>] [10 <./a1r.png>] [11 <./a24o.png>] [12 <./a2
+4r.png>] [13 <./b1.png>] [14 <./b24.png> <./d1.png>] [15 <./d24.png>]
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 193.
+
+(Project4_latex_Johannes.aux)
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 193.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 193.
+Package rerunfilecheck Info: File `Project4_latex_Johannes.out' has not changed
+.
+(rerunfilecheck)             Checksum: 7646F5361361CCBBA4E1B9EAFB1D5562;339.
+
+
+LaTeX Warning: There were undefined references.
+
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 193.
  ) 
 Here is how much of TeX's memory you used:
- 9315 strings out of 493698
- 130191 string characters out of 3144407
- 249527 words of memory out of 3000000
- 12442 multiletter control sequences out of 15000+200000
- 73416 words of font info for 94 fonts, out of 3000000 for 9000
+ 9870 strings out of 493698
+ 135900 string characters out of 3144403
+ 273527 words of memory out of 3000000
+ 12916 multiletter control sequences out of 15000+200000
+ 80724 words of font info for 94 fonts, out of 3000000 for 9000
  1025 hyphenation exceptions out of 8191
- 33i,9n,58p,962b,339s stack positions out of 5000i,500n,10000p,200000b,50000s
+ 33i,10n,58p,776b,1362s stack positions out of 5000i,500n,10000p,200000b,50000s
 {C:/Program Files/MiKTeX 2.9/fonts/enc/dvips/fontname/8r.enc}<C:/Program File
 s/MiKTeX 2.9/fonts/type1/public/fourier/fourier-mlit.pfb><C:/Program Files/MiKT
 eX 2.9/fonts/type1/public/fourier/fourier-ms.pfb><C:/Program Files/MiKTeX 2.9/f
 onts/type1/adobe/utopia/putb8a.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/ado
 be/utopia/putr8a.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/adobe/utopia/putr
 i8a.pfb>
-Output written on P4vincent.pdf (7 pages, 374822 bytes).
+Output written on Project4_latex_Johannes.pdf (15 pages, 171472 bytes).
 PDF statistics:
- 98 PDF objects out of 1000 (max. 8388607)
- 20 named destinations out of 1000 (max. 500000)
- 44 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 244 PDF objects out of 1000 (max. 8388607)
+ 94 named destinations out of 1000 (max. 500000)
+ 109 words of extra memory for PDF output out of 10000 (max. 10000000)
 
