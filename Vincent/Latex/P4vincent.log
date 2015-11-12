@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.15 (MiKTeX 2.9 64-bit) (preloaded format=pdflatex 2015.9.1)  12 NOV 2015 16:53
+This is pdfTeX, Version 3.14159265-2.6-1.40.15 (MiKTeX 2.9 64-bit) (preloaded format=pdflatex 2015.9.1)  12 NOV 2015 18:16
 entering extended mode
 **P4vincent.tex
 (P4vincent.tex
@@ -1012,77 +1012,77 @@ LaTeX Font Info:    Font shape `U/futm/m/n' will be
 LaTeX Font Info:    Font shape `U/futm/m/n' will be
 (Font)              scaled to size 5.51999pt on input line 36.
 
-<E_all.png, id=32, 1927.2pt x 964.60374pt>
+<E_all.png, id=36, 1927.2pt x 964.60374pt>
 File: E_all.png Graphic file (type png)
  <use E_all.png>
-Package pdftex.def Info: E_all.png used on input line 43.
+Package pdftex.def Info: E_all.png used on input line 44.
 (pdftex.def)             Requested size: 481.79883pt x 241.15034pt.
 
-<absm_all.png, id=33, 1927.2pt x 964.60374pt>
+<absm_all.png, id=37, 1927.2pt x 964.60374pt>
 File: absm_all.png Graphic file (type png)
  <use absm_all.png>
-Package pdftex.def Info: absm_all.png used on input line 50.
+Package pdftex.def Info: absm_all.png used on input line 51.
 (pdftex.def)             Requested size: 481.79883pt x 241.15034pt.
 
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-<sus_all.png, id=34, 1927.2pt x 964.60374pt>
+<sus_all.png, id=38, 1927.2pt x 964.60374pt>
 File: sus_all.png Graphic file (type png)
  <use sus_all.png>
-Package pdftex.def Info: sus_all.png used on input line 57.
+Package pdftex.def Info: sus_all.png used on input line 58.
 (pdftex.def)             Requested size: 481.79883pt x 241.15034pt.
 
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-<cv_all.png, id=35, 1927.2pt x 964.60374pt>
+<cv_all.png, id=39, 1927.2pt x 964.60374pt>
 File: cv_all.png Graphic file (type png)
  <use cv_all.png>
-Package pdftex.def Info: cv_all.png used on input line 64.
+Package pdftex.def Info: cv_all.png used on input line 65.
 (pdftex.def)             Requested size: 481.79883pt x 241.15034pt.
 
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-<cv2040.png, id=36, 1927.2pt x 964.60374pt>
+<cv2040.png, id=40, 1927.2pt x 964.60374pt>
 File: cv2040.png Graphic file (type png)
  <use cv2040.png>
-Package pdftex.def Info: cv2040.png used on input line 71.
+Package pdftex.def Info: cv2040.png used on input line 72.
 (pdftex.def)             Requested size: 481.79883pt x 241.15034pt.
 
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-<cv6080.png, id=37, 1927.2pt x 964.60374pt>
+<cv6080.png, id=41, 1927.2pt x 964.60374pt>
 File: cv6080.png Graphic file (type png)
  <use cv6080.png>
-Package pdftex.def Info: cv6080.png used on input line 78.
+Package pdftex.def Info: cv6080.png used on input line 79.
 (pdftex.def)             Requested size: 481.79883pt x 241.15034pt.
 
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-<tc2.png, id=38, 1445.4pt x 723.45282pt>
+<tc2.png, id=42, 1445.4pt x 723.45282pt>
 File: tc2.png Graphic file (type png)
  <use tc2.png>
-Package pdftex.def Info: tc2.png used on input line 98.
+Package pdftex.def Info: tc2.png used on input line 99.
 (pdftex.def)             Requested size: 361.34912pt x 180.86276pt.
 
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
 [3 <./E_all.png>]
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 123.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 124.
  [4 <./absm_all.png>] [5 <./sus_all.png> <./cv_all.png>]
 [6 <./cv2040.png> <./cv6080.png>] [7 <./tc2.png>]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 123.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 124.
  (P4vincent.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 123.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 123.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 124.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 124.
 Package rerunfilecheck Info: File `P4vincent.out' has not changed.
 (rerunfilecheck)             Checksum: 2F71C8F71A3A7CB4C1E2CD8633D4DB1F;43.
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 123.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 124.
  ) 
 Here is how much of TeX's memory you used:
  9315 strings out of 493698
@@ -1091,16 +1091,16 @@ Here is how much of TeX's memory you used:
  12442 multiletter control sequences out of 15000+200000
  73416 words of font info for 94 fonts, out of 3000000 for 9000
  1025 hyphenation exceptions out of 8191
- 33i,9n,58p,962b,339s stack positions out of 5000i,500n,10000p,200000b,50000s
+ 33i,9n,58p,1008b,339s stack positions out of 5000i,500n,10000p,200000b,50000s
 {C:/Program Files/MiKTeX 2.9/fonts/enc/dvips/fontname/8r.enc}<C:/Program File
 s/MiKTeX 2.9/fonts/type1/public/fourier/fourier-mlit.pfb><C:/Program Files/MiKT
 eX 2.9/fonts/type1/public/fourier/fourier-ms.pfb><C:/Program Files/MiKTeX 2.9/f
 onts/type1/adobe/utopia/putb8a.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/ado
 be/utopia/putr8a.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/adobe/utopia/putr
 i8a.pfb>
-Output written on P4vincent.pdf (7 pages, 374884 bytes).
+Output written on P4vincent.pdf (7 pages, 367461 bytes).
 PDF statistics:
- 98 PDF objects out of 1000 (max. 8388607)
+ 102 PDF objects out of 1000 (max. 8388607)
  20 named destinations out of 1000 (max. 500000)
  44 words of extra memory for PDF output out of 10000 (max. 10000000)
 

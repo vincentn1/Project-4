@@ -1,0 +1,8 @@
+#set title ''
+set xlabel 'T'
+set ylabel '{/Symbol c}'
+#set xrange [0:2]
+set yrange [-50000:800000]
+set grid
+#set loadpath 'C:\Users\Vincent\Desktop\P4 daten'
+plot 'sus20.txt' using 3:7 title 'L = 20', 'sus40.txt' using 3:7 title 'L = 40', 'sus60.txt' using 3:7 title 'L = 60', 'sus80.txt' using 3:7 title 'L = 80'
