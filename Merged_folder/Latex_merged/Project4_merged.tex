@@ -5,6 +5,7 @@
 \usepackage{amsmath}
 \usepackage{amsfonts}
 \usepackage{amssymb}
+\usepackage{subcaption}
 \usepackage{makeidx}
 \usepackage{graphicx}
 \usepackage{fourier}
@@ -12,7 +13,7 @@
 \usepackage{color}
 \usepackage{hyperref}
 \usepackage[left=2cm,right=2cm,top=2cm,bottom=2cm]{geometry}
-\author{Johannes Scheller (candidate no. 71), Vincent Noculak\\ Lukas Powalla (candidate no. 67), Richard Asbah}
+\author{Johannes Scheller (candidate no. 71), Vincent Noculak (candidate no. 22 )\\ Lukas Powalla (candidate no. 67), Richard Asbah (candidate no. 50 }
 \title{Computational Physics - Project 4}
 
 \lstset{language=C++,
@@ -129,7 +130,7 @@ The magnetization is the sum of all spin for a given configuration:
 
 \begin{align}
 \chi &=\frac{\partial <M>}{\partial H} = \frac{\partial}{\partial H} \left( \frac{1}{Z }\sum_{i=1}^{M}M_i e ^{ - \frac {1}{k_BT} E_i}\right) = -\frac{1}{k_B T } \frac{\sum_{i=1}^{M} M_i e^{-E_i \frac{1}{k_BT}}}{ Z^2}\sum_{i=1}^{M}M_i e ^{ - \frac {1}{k_BT} E_i} +\frac{1}{Z}\frac{1}{k_BT}\sum_{i=1}^{M}M_i^2 e ^{ - \frac {1}{k_BT} E_i} \\
- &= -\frac{1}{k_B T} \left( \frac{\sum_{i=1}^{M} M_i e^{-E_i \frac{1}{k_BT}}}{ Z} \right)^2 +\frac{1}{Z}\frac{1}{k_BT}\sum_{i=1}^{M}M_i^2 e ^{ - \frac {1}{k_BT} E_i} = \frac{1}{k_B T } \left( <M>^2 - <M^2> \right)
+ &= -\frac{1}{k_B T} \left( \frac{\sum_{i=1}^{M} M_i e^{-E_i \frac{1}{k_BT}}}{ Z} \right)^2 +\frac{1}{Z}\frac{1}{k_BT}\sum_{i=1}^{M}M_i^2 e ^{ - \frac {1}{k_BT} E_i} = \frac{1}{k_B T } \left( <M^2> - <M>^2 \right)
 \end{align}
 
 
@@ -230,7 +231,7 @@ If we want now to calculate the critical Temperature, we can set the equation \r
 <M(T)/N> = \Bigg[ 1- \frac{(1 - \mathrm{tanh} ^2(\beta J))^{4}}{16\mathrm{tanh}^{4}(\beta J)} \Bigg] ^{\frac{1}{8}} = 0
 \end{align}
 
-the only way to obtain <M>=0 is when equation \ref{critical temperature derivation} is valid. 
+the only way to obtain <M>=0 is when equation \ref{critical temperature derivation} is valid. We assume that the magnetisation over the temperature is continuous. 
 \begin{align}
 \frac{(1 - \mathrm{tanh}^2(\beta J))^{4}}{16\mathrm{tanh}^{4}(\beta J)} = 1 \label{critical temperature derivation}
 \end{align}
@@ -243,7 +244,7 @@ This gives us:
 \Rightarrow \frac {k_B T_c}{J} &= \frac{2}{ln(1+\sqrt{2})}\approx 2.2692
 \end{align}
 Now, we found the critical temperature of 2.2692 (dimensionless unit)
-Near the critical temperature, we can describe the behaviour of the different quantities through the so called "power law". However, we want not dive deeper into this topic and name just specific results, which can be derived with this method.
+Near the critical temperature, we can describe the behaviour of the different quantities through the so called "power law". We get the so called power law through   a taylor-expansion at the critical temperature. 
 \begin{align}
 <M(T)> & \propto (T-T_c)^{\frac{1}{8}}\\
 C_v & \propto \left| T_c - T \right|^{\alpha}\\
@@ -420,51 +421,152 @@ In the default mode, our program will write the expectation values of $<E>$, $<|
 In the end, our program frees allocated memory and closes the output file before finishing.
 
 
+\subsection{Results}
+
+\begin{figure}[h]
+\centering
+\begin{subfigure}{0.45\textwidth}
+\centering
+	\includegraphics[width=\textwidth]{Energy.png}
+	\caption{$<E>$ in a $2\times 2$-lattice for different temperatures\label{b_E}}
+\end{subfigure}
+\begin{subfigure}{0.45\textwidth}
+\centering
+	\includegraphics[width=\textwidth]{Magnetization.png}
+	\caption{$<|M|>$ in a $2\times 2$-lattice for different temperatures\label{b_M}}
+\end{subfigure}
+\begin{subfigure}{0.45\textwidth}
+\centering
+	\includegraphics[width=\textwidth]{Heat_capacity.png}
+	\caption{$<c_v>$ in a $2\times 2$-lattice for different temperatures\label{b_Cv}}
+\end{subfigure}
+\begin{subfigure}{0.45\textwidth}
+\centering
+	\includegraphics[width=\textwidth]{Susceptibility.png}
+	\caption{$<\chi>$ in a $2\times 2$-lattice for different temperatures\label{b_chi}}
+\end{subfigure}
+\caption{different figures for 2x2 lattice}
+\end{figure}
+As a first benchmark test for our program, we calculated the expectation values $<E>$, $<|M>|$, $<C_V>$ and $<\chi>$ of a $2\times2$-lattice for different temperatures. Those results could be easily compared to the analytical values from the part \ref{closed_solution}. In fig. \ref{b_E} -- \ref{b_chi}, you can see our results for these expectation values compared with the analytical solutions as functions of $T$. We took $10000$ Monte Carlo cycles for each temperature to achieve good results. You can see that the results fit very well to the analytical solutions which means that our program passed this benchmark test and works fine.
+
+In the following table, we compared the analytical results for the different expectation values for a temperature $T=1.0$. It shows that all numerical results have a precision of at least two, in most cases of even three leading digits.
+\begin{table}[h]
+	\centering
+	\caption{Analytical and numerical value of different expectaion values for $T=1.0$ in a $2\times2$-lattice}
+	\begin{tabular}{ccc}
+	& Analytical value & Numerical results \\\hline
+	$<E>$ & $-7.983928$ & $-7.984080$ \\
+	$<|M|>$ & $3.994642$ & $3.994760$ \\
+	$<c_v>$ & $0.128329$ & $0.127107$ \\
+	$<\chi>$ & $0.016043$ & $0.015494$	
+	\end{tabular}	
+\end{table}
+
+In the next step, we took a closer look at the effect of thermalization. This term describes the process of the system slowly reaching the most likely state for a given temperature. When we start with a random setup, it is very unlikely that the system is already in this state at the beginning, but it will need some time (or, in our case, some Monte Carlo cycles) to reach it.
+
+\begin{figure}[h]
+\centering
+\begin{subfigure}{0.45\textwidth}
+	\includegraphics[width=\textwidth]{a1o.png}
+	\caption{$<E>$ and $<|M|>$ in a $20\times 20$-lattice as a function of the number of Monte Carlo cycles, starting with ordered spins at $T=1.0$ \label{c_1}}
+\end{subfigure}
+\begin{subfigure}{0.45\textwidth}
+	\includegraphics[width=\textwidth]{a1r.png}
+	\caption{$<E>$ and $<|M|>$ in a $20\times 20$-lattice as a function of the number of Monte Carlo cycles, starting with random spins at $T=1.0$\label{c_2}}
+\end{subfigure}
+\begin{subfigure}{0.45\textwidth}
+	\includegraphics[width=\textwidth]{a24o.png}
+	\caption{$<E>$ and $<|M|>$ in a $20\times 20$-lattice as a function of the number of Monte Carlo cycles, starting with ordered spins at $T=2.4$\label{c_3}}
+\end{subfigure}
+\begin{subfigure}{0.45\textwidth}
+	\includegraphics[width=\textwidth]{a24r.png}
+	\caption{$<E>$ and $<|M|>$ in a $20\times 20$-lattice as a function of the number of Monte Carlo cycles, starting with random spins at $T=2.4$\label{c_4}}
+\end{subfigure}
+\caption{figures for a lattice-size of 20}
+\end{figure}
+
+To get more insight in the process of thermalization, we observed the development of $<E>$ and $<|M|>$ of a $20\times20$-lattice for temperatures of $T=1.0$ and $T=2.4$, for both starting with a random setup and a lattice with all spins pointing in one direction. You can see that development in the figures \ref{c_1} -- \ref{c_4}, where these expectation values are plotted as function of the number of Monte Carlo cycles. We also plotted how many \glq moves\grq (flipping of spins) got accepted as a function of the number of cycles in fig. \ref{c_5} -- \ref{c_6} It is obvious that this value is proportional to the number of cycles and that, the higher the temperature is, the faster the number of accepted moves increases.
+
+All these plots show that we need a bit more than $1000$ cycles in order to reach a stable state. This duration seems not to depend on the temperature, but obviously on the initial set-up: If this is close to a setup corresponding to the given temperature, it will not take long time to reach a stable state.
+
+
+
+\label{results}
+For later calculation, we set up a function called \emph{thermalization} for our program. This function performs the Metropolis algorithm without collecting data, instead it evaluates the energy after every 10 cycles. When the change between two measurements is less than $1\%$, the program starts collecting data. This takes in account the process described above and ensures that we reached a stable state before the actual calculations start.
+
+\begin{figure}[h]
+\centering
+\begin{subfigure}{0.45\textwidth}
+	\includegraphics[width=\textwidth]{b1.png}
+	\caption{The number of accepted spin flips as function of the number of cycles at $T=1.0$\label{c_5}}
+\end{subfigure}
+\begin{subfigure}{0.45\textwidth}
+	\includegraphics[width=\textwidth]{b24.png}
+	\caption{The number of accepted spin flips as function of the number of cycles at $T=2.4$\label{c_6}}
+\end{subfigure}
+\begin{subfigure}{0.45\textwidth}
+	\includegraphics[width=\textwidth]{d1.png}
+	\caption{Frequency of occurrence for different energies at $T=1.0$\label{d1}}
+\end{subfigure}
+\begin{subfigure}{0.45\textwidth}
+	\includegraphics[width=\textwidth]{d24.png}
+	\caption{Frequency of occurrence for different energies at $T=2.4$\label{d2}}
+\end{subfigure}
+\caption{general plots}
+\end{figure}
+
+In the next step, we took a closer look at the probability of the single values of $E$ to appear. We observed a $2\times2$-lattice at a temperature of $T=1.0$ respectively $T=2.4$ again and did two histograms of how often an energy value occurred. Obviously, that distribution is expanded for a higher temperature. This correspondents with the fact that the variation of the energy for these temperatures is higher, which means that more values are accessed. Both histograms can be found in fig \ref{d1} -- \ref{d2}.
+
+
+\clearpage
+
 %	e part:
 
-In figure \ref{e_all}, \ref{absm_all}, \ref{chi_all} and \ref{cv_all}, the expectation values $<E>$ and $<|M|>$, the specific heat $C_V$ and the susceptibility $\chi$ for lattice sizes $L = 20, 40, 60, 80$ can be seen as functions of $T$ close to the critical temperature. It is the easiest to estimate the critical temperature by looking at figure \ref{cv_all}, because it is at the temperature where $C_V$ is the highest. In figure \ref{cv2040} and \ref{cv6080} we increased the number of Monte Carlo cycles and decreased the temperature step length and interval to determine the temperature of the maximum of $C_V$ more precisely. In table \ref{tc} the measured critical temperatures can be seen. While it is possible to measure $T_C$ even more precisely by increasing the Monte Carlo cycles and decreasing the Temperature step length, it is not possible aim at any precision, due to the quickly increasing calculation time. 
-In figure \ref{chi_all} we can see that near $T_C$ the measured values for the susceptibility are very unstable. At $T_C$ it peak down to a very low value and then increases again to go against zero. In figure \ref{e_all} is can be observed that at $T_C$ the slope of the curve $<E(T)>$ starts to decrease again. As already mentioned in figure \ref{cv_all} we can clearly see a peak of the graph at $T_C$. In this graph it can also be seen, that the critical temperature decreases with bigger lattice sizes. 
+In figure \ref{e_all}, \ref{absm_all}, \ref{chi_all} and \ref{cv_all}, the expectation values $<E>$ and $<|M|>$, the susceptibility $\chi$ and the specific heat $C_V$ for lattice sizes $L = 20, 40, 60, 80$ can be seen as functions of $T$ close to the critical temperature. It is the easiest to estimate the critical temperature by looking at figure \ref{cv_all}, because it is at the temperature where $C_V$ is the highest. In figure \ref{cv2040} and \ref{cv6080} we increased the number of Monte Carlo cycles and decreased the temperature step length and interval to determine the temperature of the maximum of $C_V$ more precisely. In table \ref{tc} the the from figure \ref{cv2040} and \ref{cv6080} measured critical temperatures can be seen. While it is possible to measure $T_C$ even more precisely by increasing the Monte Carlo cycles and decreasing the Temperature step length, it is not possible aim at any precision, due to the quickly increasing calculation time. 
+
+In figure \ref{chi_all} we can see that for low temperatures the measured values for the susceptibility are nearly zero. At $T_C$ the susceptibilities peak up to at very high value and then decrease to go against zero again. In figure \ref{e_all} it can be observed that at $T_C$ the slope of the curve $<E(T)>$ starts to decrease again. As already mentioned in figure \ref{cv_all} we can clearly see a peak of the graph at $T_C$. In figure \ref{chi_all} and \ref{cv_all} it can also be seen, that the critical temperature decreases with bigger lattice sizes. 
 
 Figure \ref{absm_all} shows, that while $<|M|>$ stays nearly stable at a non-zero value and decreases very slow for temperatures much smaller than $T_C$, near the critical temperature it decreases quickly and goes against zero. This is a sign that a phase transition is taking place. For a temperature lower than $T_C$ the lattice has a general magnetization. Hence it is ferromagnetic. For temperatures higher than $T_C$ the lattice has nearly no magnetization. Because the susceptibility is positive then, the  lattice is paramagnetic.
 
 
 \begin{figure}[h]
-	\includegraphics[scale = 0.25]{E_all.png}
+\centering
+\begin{subfigure}{0.45\textwidth}
+	\includegraphics[width =\textwidth]{E_all.png}
 	\centering
 	\caption{Expectation value of the energy against temperature for different lattice sizes ($10^6$ Monte Carlo cycles)}
 	\label{e_all}
-\end{figure}
-
-\begin{figure}[h]
-	\includegraphics[scale = 0.25]{absm_all.png}
+\end{subfigure}
+\begin{subfigure}{0.45\textwidth}
+	\includegraphics[width=\textwidth]{absm_all.png}
 	\centering
 	\caption{Expectation value of the absolute magnetisation against temperature for different lattice sizes ($10^6$ Monte Carlo cycles)}
 	\label{absm_all}
-\end{figure}
-
-\begin{figure}[h]
-	\includegraphics[scale = 0.25]{sus_all.png}
+\end{subfigure}
+\begin{subfigure}{0.45\textwidth}
+	\includegraphics[width=\textwidth]{sus_all.png}
 	\centering
 	\caption{Susceptibility against temperature for different lattice sizes ($10^6$ Monte Carlo cycles)}
 	\label{chi_all}
-\end{figure}
-
-\begin{figure}[h]
-	\includegraphics[scale = 0.25]{cv_all.png}
+\end{subfigure}
+\begin{subfigure}{0.45\textwidth}
+	\includegraphics[width=\textwidth]{cv_all.png}
 	\centering
 	\caption{Expectation value of the specific heat against temperature for different lattice sizes ($10^6$ Monte Carlo cycles)}
 	\label{cv_all}
+\end{subfigure}
+\caption{values of different properties against temperature}
 \end{figure}
 
 \begin{figure}[h]
-	\includegraphics[scale = 0.25]{cv2040.png}
+	\includegraphics[width=\textwidth]{cv2040.png}
 	\centering
 	\caption{Expectation value of the specific heat against temperature for lattice sizes L = 20 and L = 40 ($5 \cdot 10^6$ Monte Carlo cycles)}
 	\label{cv2040}
 \end{figure}
 
 \begin{figure}[h]
-	\includegraphics[scale = 0.25]{cv6080.png}
+	\includegraphics[width=\textwidth]{cv6080.png}
 	\centering
 	\caption{Expectation value of the specific heat against temperature for lattice sizes L = 60 and L = 80 ($5 \cdot 10^6$ Monte Carlo cycles)}
 	\label{cv6080}
@@ -484,7 +586,7 @@ Figure \ref{absm_all} shows, that while $<|M|>$ stays nearly stable at a non-zer
 \end{table}
 
 \begin{figure}[h]
-	\includegraphics[scale = 0.25]{tc2.png}
+	\includegraphics[width=\textwidth]{tc2.png}
 	\centering
 	\caption{Critical temperature $T_C$ against $\frac{1}{L}$}
 	\label{tc2}
@@ -508,85 +610,39 @@ T_C(L) = T_C(L = \infty) + a \cdot \frac{1}{L}
 If we now plot $T_C$ against $\frac{1}{L}$ we should get a line. By measuring the value at which the line crosses the y-axis we can determine $T_C(L = \infty)$. At figure \ref*{tc2} we have plotted our measured values for the critical temperature (which can be seen in table \ref*{tc}) against $\frac{1}{L}$ and signed in a fit line and an error line. The fit line crosses the y-axis at $T_C = 2.263$ while the error line crosses it at $T_C = 2.273$. Thus our value for the critical temperature for an infinite sized lattice is $T_C(L = \infty) = (2.26 \pm 0.01)$. The analytical solution $T_C^{a} = 2.269$ is in the first error interval of this value. Hence our value and the analytical solution match.
 
 
-
-\subsection{Results}
-As a first benchmark test for our program, we calculated the expectation values $<E>$, $<|M>|$, $<C_V>$ and $<\chi>$ of a $2\times2$-lattice for different temperatures. Those results could be easily compared to the analytical values from the part \ref{closed_solution}. In fig. \ref{b_E} -- \ref{b_chi}, you can see our results for these expectation values compared with the analytical solutions as functions of $T$. We took $10000$ Monte Carlo cycles for each temperature to achieve good results. You can see that the results fit very well to the analytical solutions which means that our program passed this benchmark test and works fine.
-
-In the following table, we compared the analytical results for the different expectation values for a temperature $T=1.0$. It shows that all numerical results have a precision of at least two, in most cases of even three leading digits.
-\begin{table}[h]
-	\centering
-	\caption{Analytical and numerical value of different expectaion values for $T=1.0$ in a $2\times2$-lattice}
-	\begin{tabular}{ccc}
-	& Analytical value & Numerical results \\\hline
-	$<E>$ & $-7.983928$ & $-7.984080$ \\
-	$<|M|>$ & $3.994642$ & $3.994760$ \\
-	$<c_v>$ & $0.128329$ & $0.127107$ \\
-	$<\chi>$ & $0.016043$ & $0.015494$	
-	\end{tabular}	
-\end{table}
-\begin{figure}[h]
-	\includegraphics[width=\textwidth]{Energy.png}
-	\caption{$<E>$ in a $2\times 2$-lattice for different temperatures\label{b_E}}
-\end{figure}
-\begin{figure}[h]
-	\includegraphics[width=\textwidth]{Magnetization.png}
-	\caption{$<|M|>$ in a $2\times 2$-lattice for different temperatures\label{b_M}}
-\end{figure}
-\begin{figure}[h]
-	\includegraphics[width=\textwidth]{Heat_capacity.png}
-	\caption{$<c_v>$ in a $2\times 2$-lattice for different temperatures\label{b_Cv}}
-\end{figure}
-\begin{figure}[h]
-	\includegraphics[width=\textwidth]{Susceptibility.png}
-	\caption{$<\chi>$ in a $2\times 2$-lattice for different temperatures\label{b_chi}}
-\end{figure}
-In the next step, we took a closer look at the effect of thermalization. This term describes the process of the system slowly reaching the most likely state for a given temperature. When we start with a random setup, it is very unlikely that the system is already in this state at the beginning, but it will need some time (or, in our case, some Monte Carlo cycles) to reach it.
-
-To get more insight in the process of thermalization, we observed the development of $<E>$ and $<|M|>$ of a $20\times20$-lattice for temperatures of $T=1.0$ and $T=2.4$, for both starting with a random setup and a lattice with all spins pointing in one direction. You can see that development in the figures \ref{c_1} -- \ref{c_4}, where these expectation values are plotted as function of the number of Monte Carlo cycles. We also plotted how many \glq moves\grq (flipping of spins) got accepted as a function of the number of cycles in fig. \ref{c_5} -- \ref{c_6} It is obvious that this value is proportional to the number of cycles and that, the higher the temperature is, the faster the number of accepted moves increases.
-
-All these plots show that we need a bit more than $1000$ cycles in order to reach a stable state. This duration seems not to depend on the temperature, but obviously on the initial set-up: If this is close to a setup corresponding to the given temperature, it will not take long time to reach a stable state.
-
-\label{results}
-For later calculation, we set up a function called \emph{thermalization} for our program. This function performs the Metropolis algorithm without collecting data, instead it evaluates the energy after every 10 cycles. When the change between two measurements is less than $1\%$, the program starts collecting data. This takes in account the process described above and ensures that we reached a stable state before the actual calculations start.
-\begin{figure}[h]
-	\includegraphics[width=\textwidth]{a1o.png}
-	\caption{$<E>$ and $<|M|>$ in a $20\times 20$-lattice as a function of the number of Monte Carlo cycles, starting with ordered spins at $T=1.0$ \label{c_1}}
-\end{figure}
-\begin{figure}[h]
-	\includegraphics[width=\textwidth]{a1r.png}
-	\caption{$<E>$ and $<|M|>$ in a $20\times 20$-lattice as a function of the number of Monte Carlo cycles, starting with random spins at $T=1.0$\label{c_2}}
-\end{figure}
-\begin{figure}[h]
-	\includegraphics[width=\textwidth]{a24o.png}
-	\caption{$<E>$ and $<|M|>$ in a $20\times 20$-lattice as a function of the number of Monte Carlo cycles, starting with ordered spins at $T=2.4$\label{c_3}}
-\end{figure}
-\begin{figure}[h]
-	\includegraphics[width=\textwidth]{a24r.png}
-	\caption{$<E>$ and $<|M|>$ in a $20\times 20$-lattice as a function of the number of Monte Carlo cycles, starting with random spins at $T=2.4$\label{c_4}}
-\end{figure}
-
-\begin{figure}[h]
-	\includegraphics[width=\textwidth]{b1.png}
-	\caption{The number of accepted spin flips as function of the number of cycles at $T=1.0$\label{c_5}}
-\end{figure}
-\begin{figure}[h]
-	\includegraphics[width=\textwidth]{b24.png}
-	\caption{The number of accepted spin flips as function of the number of cycles at $T=2.4$\label{c_6}}
-\end{figure}
-
-In the next step, we took a closer look at the probability of the single values of $E$ to appear. We observed a $2\times2$-lattice at a temperature of $T=1.0$ respectively $T=2.4$ again and did two histograms of how often an energy value occurred. Obviously, that distribution is expanded for a higher temperature. This correspondents with the fact that the variation of the energy for these temperatures is higher, which means that more values are accessed. Both histograms can be found in fig \ref{d1} -- \ref{d2}.
-
-\begin{figure}[h]
-	\includegraphics[width=\textwidth]{d1.png}
-	\caption{Frequency of occurrence for different energies at $T=1.0$\label{d1}}
-\end{figure}
-\begin{figure}[h]
-	\includegraphics[width=\textwidth]{d24.png}
-	\caption{Frequency of occurrence for different energies at $T=2.4$\label{d2}}
-\end{figure}
+\clearpage
 
 \section{Comparison and discussion of results}
 
+\begin{figure}[h]
+\begin{subfigure}{.5\textwidth}
+  \centering
+  \includegraphics[width=.8\linewidth]{spinlatticeT1.png}
+  \caption{temperature T=1}
+  \label{fig:sfig1}
+\end{subfigure}%
+\begin{subfigure}{.5\textwidth}
+  \centering
+  \includegraphics[width=.8\linewidth]{spinlatticeT2.png}
+  \caption{temperature T=2}
+  \label{fig:sfig2}
+\end{subfigure}
+\begin{subfigure}{.5\textwidth}
+  \centering
+  \includegraphics[width=.8\linewidth]{spinlatticeTc.png}
+  \caption{critical temperature}
+  \label{fig:sfig2}
+\end{subfigure}
+\begin{subfigure}{.5\textwidth}
+  \centering
+  \includegraphics[width=.8\linewidth]{spinlatticeT4.png}
+  \caption{temperature T=4}
+  \label{fig:sfig2}
+\end{subfigure}
+\caption{plots of a lattice-size 200 at a specific temperature T ; the number of monte carlo cycles is selected in a  way that we can assume that we are in the most likely state }
+\label{fig:fig}
+\end{figure}
 \section{source code}
-
+The source code can  be found in out github-repository. The latex-file is in the merged file.
+\url{https://github.com/vincentn1/Project-4.git}
 \end{document}
