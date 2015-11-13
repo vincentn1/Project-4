@@ -420,6 +420,38 @@ In the default mode, our program will write the expectation values of $<E>$, $<|
 
 In the end, our program frees allocated memory and closes the output file before finishing.
 
+\subsection{Parallelization of the code}
+\begin{lstlisting}
+//C++/Omp section
+//ising modle with omp
+S1 = tempStart;
+E1 = S2 = tempStart+(tempMax- tempStart)/4;
+E2 = S3 = tempStart+(tempMax- tempStart)/2;
+E3 = S4 =  tempStart+ 3*(tempMax- tempStart)/4;
+E4 = tempMax;
+
+// paralizing the 4 threads each thread run specfic temprature part.
+#pragma omp parallel sections shared (tempStep, size, isRandomSetup,mccycles)
+{
+    #pragma omp section
+    {
+     JohansenCode(S1, E1, tempStep, size, mccycles, isRandomSetup);
+    }
+    #pragma omp section
+    {
+     JohansenCode(S2, E2, tempStep, size, mccycles, isRandomSetup);
+    }
+    #pragma omp section
+    {
+     JohansenCode(S3, E3, tempStep, size, mccycles, isRandomSetup);
+    }
+    #pragma omp section
+    {
+     JohansenCode(S4, E4, tempStep, size, mccycles, isRandomSetup);
+    }
+}
+\end{lstlisting}
+We used omp to parallelize our code by arranging 4 equal sub sections of the temperature region, each subsection is calculated by one thread at the time. The tested computer has 4 threads and gave a speedup factor by 3.  
 
 \subsection{Results}
 
