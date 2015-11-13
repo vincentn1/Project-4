@@ -1,4 +1,4 @@
-\documentclass[10pt,a4paper]{article}
+	\documentclass[10pt,a4paper]{article}
 \usepackage[utf8]{inputenc}
 \usepackage[english]{babel}
 \usepackage[T1]{fontenc}
@@ -13,7 +13,7 @@
 \usepackage{color}
 \usepackage{hyperref}
 \usepackage[left=2cm,right=2cm,top=2cm,bottom=2cm]{geometry}
-\author{Johannes Scheller (candidate no. 71), Vincent Noculak (candidate no. 22 )\\ Lukas Powalla (candidate no. 67), Richard Asbah (candidate no. 50 }
+\author{Johannes Scheller (candidate no. 71), Vincent Noculak (candidate no. 22)\\ Lukas Powalla (candidate no. 67), Richard Asbah (candidate no. 50) }
 \title{Computational Physics - Project 4}
 
 \lstset{language=C++,
@@ -30,12 +30,13 @@
 \newpage
 
 \section*{Introduction}
-In project 4 we are dealing with the Ising model in two dimensions without an external magnetic field. We are looking at a lattice of L times L particles, where each particle has a spin value of $\pm 1$. In order to compute different interesting properties of the system, we want to use the metropolis algorithm.  With our computations, we want to calculate the Energy, the absolute value of the magnetisation, the heat capacity and susceptibility of the system as a function of temperature in order to study phase transitions of the system. 
-In our case, we want to study the phase transition from a ordered phase for low temperatures to a disordered phase for high temperatures above the critical Temperature $T_c$(in a canonical ensemble this means a second order phase transition and therefore a divergence of the heat capacity at the critical Temperature).
+In project 4 we are dealing with the Ising model in two dimensions without an external magnetic field. We are looking at a lattice of L times L particles, where each particle has a spin value of $\pm 1$. In order to compute different interesting properties of the system, we want to use the metropolis algorithm.  With our computations, we want to calculate the expectation value of the Energy, the expectation value of the absolute value of the magnetisation, the heat capacity and susceptibility of the system as a function of temperature in order to study phase transitions of the system. 
+In our case, we want to analyse, weather a phase transition from a ordered phase for low temperatures to a disordered phase for high temperatures above the critical Temperature $T_c$ takes place. (in a canonical ensemble this means a second order phase transition and therefore a divergence of the heat capacity at the critical Temperature).
 In order to get familiar with all the quantities, we first wan to study the case of a 2 times 2 lattice. For This lattice-size, we want to find a analytical expression for all interesting physical properties of the system and compare them with the computed values.
 However, researcher have solved the two dimensional Ising model a long time ago for any and even for infinite size.
-The Ising model in two dimensions has been solved first for any "fixed" size by Kaufman in 1949 and in the end even for a infinite size by Onsager in 1944.  (compare with "Statistical Mechanics: Algorithms and Computations; Werner Krauth; published 2006")
+The Ising model in two dimensions has been solved first for any "fixed" size by Kaufman in 1949 and in the end for a infinite size by Onsager in 1944.  (compare with "Statistical Mechanics: Algorithms and Computations; Werner Krauth; published 2006; page 237")
 This project may also show the link from statistical physics to macroscopic properties of a given physical system, which is a interesting relation.
+
 \section{Theory}
 
 \subsection{General properties of physical systems and their link to statistical physics}
@@ -43,7 +44,7 @@ This project may also show the link from statistical physics to macroscopic prop
 \subsubsection{physical ensembles}
 %Lukas changed this; newest version 08.11.15
 Let us now look at a physical system and its surroundings. 
-In principle, it is necessary to describe the relation of the physical system and its surroundings in order to determine the properties of the system.(sometimes this relations are related to physical boundary conditions) It is necessary to know whether we want to allow for instance particle/heat exchange or not. How we set up our system also defines us the thermodynamic potential, which can be used to describe the system.(e.g. Entropy, Helmholtz,Gibbs) All in all, we have the Microcanonical ensemble, the canonical ensemble, the Grandcanonical ensemble and the pressure canonical ensemble. (in this case an ensemble means a collection of mircoscopic systems, compare with the lecture notes Computational physics 2015 at University of Oslo by Morten Hjorth-Jensen page 417 )
+In principle, it is necessary to describe the relation of the physical system and its surroundings in order to determine the properties of the system.(sometimes this relations are related to physical boundary conditions) It is necessary to know whether we want to allow for instance particle/heat exchange or not. How we set up our system also defines us the thermodynamic potential, which can be used to describe the system.(e.g. Entropy, Helmholtz,Gibbs) All in all, we have the Micro canonical ensemble, the canonical ensemble, the Grand canonical ensemble and the pressure canonical ensemble. (in this case an ensemble means a collection of microscopic systems, compare with the lecture notes Computational physics 2015 at University of Oslo by Morten Hjorth-Jensen page 417 )
 In the following, we will always deal with the canonical ensemble. This  means that we don't allow particle exchange from the system with its surroundings, but we allow exchange of heat with the environment. 
 Fixed variables are in this case the temperature, the total volume and the total particle number. The total energy of the canonical ensemble is not constant, because there can be heat exchange with the surroundings. The system, which does not allow heat exchange and does not allow particle exchange is called micro-canonical ensemble. (compare "Statistical Mechanics  An Intermediate Course; 2nd Edition; G. Morandi/F. Napoli/ E. Ercolessi; page 94ff") 
 
@@ -244,7 +245,7 @@ This gives us:
 \Rightarrow \frac {k_B T_c}{J} &= \frac{2}{ln(1+\sqrt{2})}\approx 2.2692
 \end{align}
 Now, we found the critical temperature of 2.2692 (dimensionless unit)
-Near the critical temperature, we can describe the behaviour of the different quantities through the so called "power law". We get the so called power law through   a taylor-expansion at the critical temperature. 
+Near the critical temperature, we can describe the behaviour of the different quantities through the so called "power law". We get the so called power law through   a taylor-expansion at the critical temperature.  However, we want to spend no time on deriving the critical exponents of the power laws. What is interesting is that with this power lows, a few systems with the same properties behave close to the critical temperature the same. No matter, which lattice-size we choose, we get the same behaviour close to the critical temperature. 
 \begin{align}
 <M(T)> & \propto (T-T_c)^{\frac{1}{8}}\\
 C_v & \propto \left| T_c - T \right|^{\alpha}\\
@@ -252,9 +253,13 @@ C_v & \propto \left| T_c - T \right|^{\alpha}\\
 \end{align}
 with $\alpha=0, \gamma=\frac{7}{4} $. In addition to that, we can describe the correlation length of the system by $\xi(T) $:
 \begin{align}
-\xi (T) \propto \left| T_c - T \right|^{-\nu}
+\xi (T) \propto \left| T_c - T \right|^{-\nu} \label{nue}
 \end{align}
-
+All in all, the critical temperature scales than as follows:
+\begin{align}
+T_c(L)-T_c(L=\infty)= a \cdot L^{\frac{-1}{\nu}}
+\end{align}
+In this case, a is a constant and $\nu$ is defined through the previous equation \ref{nue}. 
 \subsection{Closed solution for a 2 dimensional 2 x 2 lattice \label{closed_solution}}
 
 We want now to look at a 2 x 2 lattice and we want to calculate the partition function, the energy, magnetisation, heat capacity and susceptibility of the system  dependent of T. 
@@ -327,12 +332,7 @@ C_v &= \frac{1}{k_b T^2} \left( \frac{1}{Z} \sum_{i=1}^{M} E_i^2 e^{- \beta E_i 
 &= \frac{64}{k_b T^2} \left( \frac{ J +3 J \cdot \mathrm{cosh}(8J \beta)}{\left(3+\mathrm{cosh}(8J\beta)\right)^2} \right)\\
 \end{align}
 At last, we want to have a look at the magnetic susceptibility. This quantity is a magnetic property of the material. The magnetic susceptibility describes the response of the material to an applied magnetic field. 
-\begin{align}
-\chi &= \frac{1}{k_b T} \cdot \left( \frac{1}{Z} \sum_{i=1}^{M} M_i^2 e^{- \beta E_i } - \left( \frac{1}{Z} \sum_{i=1}^{M} M_i e^{- \beta E_i }  \right)^2 \right)\\
-&= \frac{1}{k_b T} \cdot \left( \frac{1}{Z} \cdot \left( 4^2 \cdot 1 \cdot e^{8J\beta}+ 2^2 \cdot 4+(-2)^2 \cdot 4 + (-4)^2 \cdot 1 \cdot e^{8J \beta } \right) - \left( 0  \right)^2 \right)\\
-&= \frac{1}{k_b T} \cdot \frac{32 e^{8J\beta}+32}{ 12+ 4 \cdot \mathrm{cosh} \left( 8J \beta \right)}\\
-&= \frac{1}{k_b T} \cdot \frac{8 e^{8J\beta}+8}{ 3+ \cdot \mathrm{cosh} \left( 8J \beta \right)}\\
-\end{align}
+
 
 \begin{align}
 \chi_{abs} &= \frac{1}{k_b T} \cdot \left( \frac{1}{Z} \sum_{i=1}^{M} M_i^2 e^{- \beta E_i } - \left( \frac{1}{Z} \sum_{i=1}^{M} |M_i| e^{- \beta E_i }  \right)^2 \right)\\
@@ -612,7 +612,20 @@ If we now plot $T_C$ against $\frac{1}{L}$ we should get a line. By measuring th
 
 \clearpage
 
-\section{Comparison and discussion of results}
+\section{Discussion}
+
+All in all, our results for the two times two lattice matched with the theoretical predictions. 
+We have observed that a phase transition is taking place at the critical temperature. There the lattice changes from being ferromagnetic to being paramagnetic.
+Our numerically calculated value for the critical temperature for an infinite sized lattice which is $T_C(L = \infty) = (2.26 \pm 0.01)$ matches with the analytical solution $T_C^{a} = 2.269$. By increasing the Monte Carlo cycles it would be possible to get a more accurate result, but the calculation time would increase. Thus a balance between the accuracy of the numerical result and the needed time for the computation of the numerical result needs to be found.
+We looked at our system and visualized a 200 x 200 spin-lattice for different temperatures after the same am. We visualized the spin-array through a 2D-plot, where the spin-value -1 indicated with black and the spin-value 1 with white pixels. For low temperatures like in figure \ref{fig:sfig1}, we observe a ordered configuration of the spins. At a low temperature and after a infinite number of monte carlo cycles, all spins should be up or all spins should be down. This means that in figure \ref{fig:sfig1}, you would get more or less all spins pointing in one direction after more monte carlo cycles.  When we increase the temperature and we come close to the critical temperature, a increase of the so called correlation length kicks in. This means that the influence of particles becomes more and more important. At the critical temperature, "everybody sees everybody". Above the critical temperature, the correlation length drops down to zero.  
+Thermal noise also gets more and more important, when we heat up the system. Comparing the figure \ref{fig:sfig1} to figure \ref{fig:sfig2}, we see more spontaneous flipping of the spins. 
+If we now heat up the system, we observe a transition from ordered to disordered configuration. We can see that for $T=2$, we get a more disordered spin-array. Above the critical temperature, we can see that the system in in a disordered state. (order decreases from \ref{fig:sfig1} to figure \ref{fig:sfig4} ) 
+In addition to that we notice, that for low temperatures, we get districts of only white and districts of only black parts. 
+The transition from ordered to less ordered conformation of the system with increasing of the temperature can be identified with a increase of entropy of the system. 
+To cluster groups with equal behaviour close to the critical temperature (as can be done like with the 2D Ising model; with fixed critical exponents) is quite useful in order to check whether the computed results are correct.(if you know to which group your system belongs, you know the critical exponent of the system). This can be described by the mentioned power law behaviour. 
+We have seen in our project that a classical, fairly simple model gives the qualitatively right physical behaviour. We have also to keep in mind that in reality in our case, we have to deal with quantum systems and we also have to consider interactions between "not nearest neighbours".
+Nevertheless, such considerations are outside the scope of this project.
+
 
 \begin{figure}[h]
 \begin{subfigure}{.5\textwidth}
@@ -631,13 +644,13 @@ If we now plot $T_C$ against $\frac{1}{L}$ we should get a line. By measuring th
   \centering
   \includegraphics[width=.8\linewidth]{spinlatticeTc.png}
   \caption{critical temperature}
-  \label{fig:sfig2}
+  \label{fig:sfig3}
 \end{subfigure}
 \begin{subfigure}{.5\textwidth}
   \centering
   \includegraphics[width=.8\linewidth]{spinlatticeT4.png}
   \caption{temperature T=4}
-  \label{fig:sfig2}
+  \label{fig:sfig4}
 \end{subfigure}
 \caption{plots of a lattice-size 200 at a specific temperature T ; the number of monte carlo cycles is selected in a  way that we can assume that we are in the most likely state }
 \label{fig:fig}
