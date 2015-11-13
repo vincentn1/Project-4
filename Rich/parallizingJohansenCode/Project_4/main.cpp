@@ -8,78 +8,103 @@
 #include <time.h>
 #include <lib.h>
 #include <omp.h>
+#include <vector>
+#include "random.h"
 using namespace std;
 
 //Those methods/variables will be used
 double random(int &seed);
 void initialize(int size, int** grid, bool isRandom, long idum, double& M, double& E);
 void readInput(double& tempStart, double& tempMax, double& tempStep, int& size, int& mccycles, bool& isRandomSetup);
-void monteCarlo(int** spinArray, int size, long& idum, double* energyDeltas, double& M, double& E, int& accept);
-void thermalization (int** spinArray, int size, long& idum, double* energyDeltas, double& M, double& E, int& accept);
+void monteCarlo(int** spinArray, int size, Random* random, double* energyDeltas, double& M, double& E, int& accept);
+void thermalization (int** spinArray, int size, Random *random, double* energyDeltas, double& M, double& E, int& accept);
 void output(int size, int cycles, double temp, double* averages);
-void JohansenCode(int stratingTemp,int endingTemp, double tempStart,double tempMax,double tempStep,int size,int mccycles,bool isRandomSetup);
+void JohansenCode(double tempStart,double tempMax,double tempStep,int size,int mccycles,bool isRandomSetup);
 ofstream ofile;
 
 //main program
 int main()
 {
     int thread_num = omp_get_max_threads ();
-     cout << "  C++/OpenMP version" << endl;
-     cout << "  Ising model with OpenMP" << endl;
+    cout << "  C++/OpenMP version" << endl;
+    cout << "  Ising model with OpenMP" << endl;
 
-     cout << "  The number of processors available = " << omp_get_num_procs ( ) << endl;
-     cout << "  The number of threads available    = " << thread_num <<  endl;
-     // defining time and various variables needed for the integration
-     int num_threads = omp_get_num_procs();
-     omp_set_num_threads(num_threads);
+    cout << "  The number of processors available = " << omp_get_num_procs ( ) << endl;
+    cout << "  The number of threads available    = " << thread_num <<  endl;
+    // defining time and various variables needed for the integration
+
+
+    int num_threads = omp_get_num_procs();
+    omp_set_num_threads(num_threads);
+
+
 
     int size, mccycles;
     double tempStart, tempMax, tempStep;
     bool isRandomSetup;
-    double energyChanges[5];
-    double  averages[5];
-
 
     ofile.open("output.txt");
-    ofile << "#size" << "\t\t" << "cycles" << "\t\t" << "temp" << "\t\t" << "<E>" << "\t\t" << "<C_v>" << "\t\t" << "<|M|>" << "\t\t" << "<chi>" << endl;
     //read input from screen, see function
     readInput(tempStart, tempMax, tempStep, size, mccycles, isRandomSetup);
-#pragma omp parallel sections
+
+    clock_t start, finish;
+    start = clock();
+
+    //C++/Omp section
+    //ising modle with omp
+    //makeing the stariting annd teh end point for each loop.
+    double S1,S2,S3,S4,E1,E2,E3,E4;
+
+    S1 = tempStart;
+    E1 = S2 = tempStart+(tempMax- tempStart)/4;
+    E2 = S3 = tempStart+(tempMax- tempStart)/2;
+    E3 = S4 =  tempStart+ 3*(tempMax- tempStart)/4;
+    E4 = tempMax;
+
+// parallizing the 4 threads each thread run specfic temprature part.
+    #pragma omp parallel sections shared (tempStep, size, isRandomSetup,mccycles)
+    {
     #pragma omp section
     {
-        JohansenCode(0,0, tempStart, tempMax, tempStep, size, mccycles, isRandomSetup);
+     JohansenCode(S1, E1, tempStep, size, mccycles, isRandomSetup);
     }
     #pragma omp section
     {
-     // JohansenCode(0,0, tempStart, tempMax, tempStep, size, mccycles, isRandomSetup);
+     JohansenCode(S2, E2, tempStep, size, mccycles, isRandomSetup);
     }
     #pragma omp section
     {
-      //JohansenCode(0,0, tempStart, tempMax, tempStep, size, mccycles, isRandomSetup);
+     JohansenCode(S3, E3, tempStep, size, mccycles, isRandomSetup);
     }
     #pragma omp section
     {
-      JohansenCode(0,0, tempStart, tempMax, tempStep, size, mccycles, isRandomSetup);
+     JohansenCode(S4, E4, tempStep, size, mccycles, isRandomSetup);
     }
 }
 
-
-
-
+        finish = clock();
+        cout << "time: " << double ( (finish - start)/(double)CLOCKS_PER_SEC ) << endl;
 
     //close output
     ofile.close();
     return 0;
-}//end of main
-
-//this is johnse code
-void JohansenCode(int stratingTemp,int endingTemp,double tempStart,double tempMax,double tempStep,int size,int mccycles,bool isRandomSetup)
+}
+void JohansenCode(double tempStart,double tempMax,double tempStep,int size,int mccycles,bool isRandomSetup)
 {
+
     time_t start, finish, seed;
     seed = time(NULL);
     int acceptedmoves;
     double M, E;
     long idum;
+    //seed for ran2
+    omp_get_max_threads ();
+    int num_threads = omp_get_num_procs();
+    vector<Random*> randoms;
+    for(int i=0; i<num_threads; i++) {
+        int seed = -(i+1); // -1, -2, -3, -4
+        randoms.push_back(new Random(seed));
+    }
     idum = -((long)seed);
     double energyChanges[5], averages[5];
     int** spinArray = (int**) matrix(size, size, sizeof(int));
@@ -92,6 +117,7 @@ void JohansenCode(int stratingTemp,int endingTemp,double tempStart,double tempMa
      * performing Monte Carlo
      */
     //loop over desired temperature range
+
     for (temp=tempStart; temp<=tempMax; temp+=tempStep){
         acceptedmoves=0;
         //reset Energy and magnetization (averages)
@@ -104,10 +130,10 @@ void JohansenCode(int stratingTemp,int endingTemp,double tempStart,double tempMa
             energyChanges[i] = exp(((double)-delEnergy)/((double)temp));
         }
         //thermalization - comment out for exercices where thermalization behaviour should be studied!
-        thermalization(spinArray, size, idum, energyChanges, M, E, acceptedmoves);
+        thermalization(spinArray, size, randoms[omp_get_thread_num()], energyChanges, M, E, acceptedmoves);
         //actual Monte Carlo happens here
         for(int i=0; i<mccycles; i++){
-            monteCarlo(spinArray, size, idum, energyChanges, M, E, acceptedmoves);
+            monteCarlo(spinArray, size, randoms[omp_get_thread_num()], energyChanges, M, E, acceptedmoves);
             averages[0]+=E;
             averages[1]+=E*E;
             averages[2]+=M;
@@ -122,8 +148,10 @@ void JohansenCode(int stratingTemp,int endingTemp,double tempStart,double tempMa
             //This is for part d, can be commented out else
             //ofile << E << endl;
         }
+         //cout<<temp<<averages[0];
         //output of data for this temperature (comment out if not used!)
-        to(size, mccycles, temp, averages);
+        output(size, mccycles, temp, averages);
+
     }
 
     /*
@@ -134,6 +162,7 @@ void JohansenCode(int stratingTemp,int endingTemp,double tempStart,double tempMa
     free_matrix((void **) spinArray);
 }
 
+
 //This method takes an integer array and its size and can initialize it in random or ordered way with -1 and 1 (=spins)
 void initialize(int size, int** grid, bool isRandom, long idum, double& M, double& E)
 {
@@ -142,7 +171,7 @@ void initialize(int size, int** grid, bool isRandom, long idum, double& M, doubl
         //initialize randomly
         for(i=0; i<size; i++){
             for(j=0; j<size; j++){
-                if(ran3(&idum)>0.5){grid[i][j]=-1;}else{grid[i][j]=1;}
+                if(random){grid[i][j]=-1;}else{grid[i][j]=1;}
             }}}else{
         //all spins up!
         for(i=0; i<size; i++){
@@ -181,17 +210,16 @@ void readInput(double& tempStart, double& tempMax, double& tempStep, int& size, 
 }
 
 //This is the actual Monte Carlo method as described in the report!
-void monteCarlo(int** spinArray, int size, long& idum, double* energyDeltas, double& M, double& E, int& accept){
+void monteCarlo(int** spinArray, int size, Random* random, double* energyDeltas, double& M, double& E, int& accept){
     int count;
     for(count=0; count<=(size*size); count++){
         //Pick random position
-        int x, y;
-        x=(int)(ran3(&idum)*size);
-        y=(int)(ran3(&idum)*size);
+        int x = (int)random->nextDouble()*size;
+        int y = (int)random->nextDouble()*size;
         //check energy difference
         double deltaE =(double) 2*spinArray[x][y]*(spinArray[(size+x+1)%size][y]+spinArray[(size+x-1)%size][y]+spinArray[x][(size+y+1)%size]+spinArray[x][(size+y-1)%size]);
         //compare it to random number
-        if(ran3(&idum)<=energyDeltas[(int)(deltaE+8)/4]){
+        if(random->nextDouble()<=energyDeltas[(int)(deltaE+8)/4]){
             //change spin
             spinArray[x][y]*=-1;
             //update energy and magnetization
@@ -201,18 +229,17 @@ void monteCarlo(int** spinArray, int size, long& idum, double* energyDeltas, dou
             accept++;
         }
     }
-
     return;
 }
 
 //This method performs MC until the system is in the most likely state
 //To check this, it compares the energy before and after the 10 cycles. Loop is performed until (E'-E)<0.01*E' (1% difference)
-void thermalization (int** spinArray, int size, long& idum, double* energyDeltas, double& M, double& E, int& accept) {
+void thermalization (int** spinArray, int size, Random* random, double* energyDeltas, double& M, double& E, int& accept) {
     int Etemp;
     do {
         Etemp = E;
         for(int i=0; i<10; i++){
-            monteCarlo(spinArray, size, idum, energyDeltas, M, E, accept);
+            monteCarlo(spinArray, size, random, energyDeltas, M, E, accept);
         }
     }while((abs(E-Etemp))>(abs(E*0.01)));
 
